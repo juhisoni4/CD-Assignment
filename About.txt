@@ -1,0 +1,2 @@
+Hello there my name is Juhi Soni and I am learning Git. Till now I have learned the how to clone the repository, add, commit, push.And now I am working on brache and remote.
+steps for remote git fetch , merge 	and pull
