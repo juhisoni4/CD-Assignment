@@ -1,17 +1,9 @@
 package com.crud.hibernate.xml;
 
 import java.util.List;
-
-
-import javax.persistence.Query;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
-
-
 public class StudentDbUtil {
 
 	// create a session factory
@@ -22,7 +14,7 @@ public class StudentDbUtil {
 
 	public static List<Student> listStudent() {
 
-		session = factory.openSession();
+		session = factory.getCurrentSession();
 
 		// start the transection
 		session.beginTransaction();
@@ -38,17 +30,26 @@ public class StudentDbUtil {
 
 	public static void addOrUpdateStudent(Student student1) {
 
-		// create a session
-		session = factory.openSession();
+		try {
+			// create a session
+			session = factory.getCurrentSession();
+			System.out.println("getSession");
 
-		// start the transaction
-		session.beginTransaction();
+			// start the transaction
+			session.getTransaction().begin();;
+			System.out.println("begin Transaction");
 
-		// save the student
-		session.saveOrUpdate(student1);
+			// save the student
+			session.saveOrUpdate(student1);
+			System.out.println("update the student");
+			
+			session.getTransaction().commit();
+			System.out.println("commit the transaction");
 
-		// commit the transaction
-		session.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.println("In catch block");
+			e.printStackTrace();
+		} 
 	}
 
 	public static Student getStudent(String theId) {
@@ -58,7 +59,7 @@ public class StudentDbUtil {
 		System.out.println(id);
 
 		// create a session
-		session = factory.openSession();
+		session = factory.getCurrentSession();
 
 		// start the transaction
 		session.beginTransaction();
@@ -66,7 +67,9 @@ public class StudentDbUtil {
 		// load the student
 		Student myStudent = (Student) session.get(Student.class, id);
 
+		session.getTransaction().commit();
 		return myStudent;
+
 	}
 
 	public static void deleteStudent(String theId) {
@@ -75,7 +78,7 @@ public class StudentDbUtil {
 		int id = Integer.parseInt(theId);
 
 		// get current session
-		session = factory.openSession();
+		session = factory.getCurrentSession();
 
 		// start the transaction
 		session.beginTransaction();

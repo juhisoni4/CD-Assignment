@@ -2,9 +2,6 @@ package com.crud.hibernate.xml;
 
 import java.util.List;
 
-
-import javax.persistence.Query;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -35,19 +32,27 @@ public class StudentDbUtil {
 
 	public static void addOrUpdateStudent(Student student1) {
 
-		// create a session
-		session = factory.getCurrentSession();
+		try {
+			// create a session
+			session = factory.getCurrentSession();
+			System.out.println("getSession");
 
-		// start the transaction
-		session.getTransaction().begin();;
+			// start the transaction
+			session.getTransaction().begin();;
+			System.out.println("begin Transaction");
 
-		// save the student
-		session.saveOrUpdate(student1);
+			// save the student
+			session.saveOrUpdate(student1);
+			System.out.println("update the student");
+			
+			session.getTransaction().commit();
+			System.out.println("commit the transaction");
 
-		// commit the transaction
-		session.getTransaction().commit();
-		
-	    }
+		} catch (Exception e) {
+			System.out.println("In catch block");
+			e.printStackTrace();
+		} 
+	}
 
 	public static Student getStudent(String theId) {
 
@@ -64,7 +69,9 @@ public class StudentDbUtil {
 		// load the student
 		Student myStudent = (Student) session.get(Student.class, id);
 
+		session.getTransaction().commit();
 		return myStudent;
+
 	}
 
 	public static void deleteStudent(String theId) {

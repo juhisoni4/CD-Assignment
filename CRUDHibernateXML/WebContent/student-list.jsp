@@ -12,7 +12,7 @@
 
 	<div>
 		<input type="button" value="Add Student"
-			onclick="window.location.href='add-student.jsp'; return false;" />
+			onclick="window.location.href='update-student.jsp'; return false;" />
 			<br/><br/>
 			
 		<table border="1">
