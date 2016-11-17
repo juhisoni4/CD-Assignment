@@ -1,4 +1,4 @@
-package com.crud.hibernate.xml;
+package com.crud.hibernate.annotation;
 
 import java.util.List;
 import org.hibernate.Session;
@@ -16,7 +16,7 @@ public class StudentDbUtil {
 
 		session = factory.getCurrentSession();
 
-		// start the transection
+		// start the transaction
 		session.beginTransaction();
 
 		// query student
@@ -68,8 +68,8 @@ public class StudentDbUtil {
 		Student myStudent = (Student) session.get(Student.class, id);
 
 		session.getTransaction().commit();
+		
 		return myStudent;
-
 	}
 
 	public static void deleteStudent(String theId) {

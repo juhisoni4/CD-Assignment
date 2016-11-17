@@ -1,4 +1,4 @@
-package com.crud.hibernate.xml;
+package com.crud.hibernate.annotation;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="student")
+//@Table(name="student")
 public class Student {
 	
 	@Id

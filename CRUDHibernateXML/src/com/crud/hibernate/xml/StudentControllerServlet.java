@@ -80,11 +80,19 @@ public class StudentControllerServlet extends HttpServlet {
 
 	private void deleteStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		// read the student id from the dat
+		String[] values = request.getParameterValues("studentId");
+		
 		String theId = request.getParameter("studentId");
+		
+		for(String value:values){
+			System.out.println(value);
+			StudentDbUtil.deleteStudent(value);
+		}
+		
+		// read the student id from the dat		
 
 		// delete student from database
-		StudentDbUtil.deleteStudent(theId);
+		//StudentDbUtil.deleteStudent(theId);
 
 		// send them back to the list student page
 		listStudents(request, response);

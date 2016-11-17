@@ -1,4 +1,4 @@
-package com.crud.hibernate.xml;
+package com.crud.hibernate.annotation;
 
 import java.io.IOException;
 import java.util.List;
