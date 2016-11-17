@@ -1,0 +1,124 @@
+Hibernate
+
+* Session:
+A org.hibernate.Session begins when the first call to getCurrentSession() is made for the current thread. 
+It is then bound by Hibernate to the current thread. When the transaction ends, either through commit or rollback, 
+Hibernate automatically unbinds the org.hibernate.Session from the thread and closes it for you. If you call getCurrentSession() again, 
+you get a new org.hibernate.Session and can start a new unit of work.
+
+-> When  we are using collections in our pojo, we simply modify that collection object using collection framework method.
+   There is no explicit call to update() or save(); Hibernate automatically detects that the collection has been modified and needs
+   to be updated. This is called automatic dirty checking.
+-> As long as our object is in persistent state, that is, bound to a particular Hibernate org.hibernate.Session, Hibernate monitors any 
+   changes and executes SQL in a write-behind fashion. 
+* Flushing:
+   The process of synchronizing the memory state with the database, usually only at the end of a unit of work, is called flushing. 
+   
+* First Level Cache
+  First level cache is associated with “session” object. The scope of cache objects is of session. Once session is closed, cached objects are gone forever.
+  First level cache is enabled by default and you can not disable it. When we query an entity first time, it is retrieved from database and stored in first 
+  level cache associated with hibernate session. If we query same object again with same session object, it will be loaded from cache and no sql query will
+  be executed. The loaded entity can be removed from session using evict() method. The next loading of this entity will again make a database call if it has
+  been removed using evict() method. The whole session cache can be removed using clear() method. It will remove all the entities stored in cache.
+
+* Second Level Cache
+  Second level cache is apart from first level cache which is available to be used globally in session factory scope. second level cache is created in session
+  factory scope and is available to be used in all sessions which are created using that particular session factory. It also means that once session factory is
+  closed, all cache associated with it die and cache manager also closed down. Whenever hibernate session try to load an entity, the very first place it look for
+  cached copy of entity in first level cache (associated with particular hibernate session). If cached copy of entity is present in first level cache, it is 
+  returned as result of load method. If there is no cached entity in first level cache, then second level cache is looked up for cached entity. If second level
+  cache has cached entity, it is returned as result of load method. But, before returning the entity, it is stored in first level cache also so that next invocation to
+  load method for entity will return the entity from first level cache itself, and there will not be need to go to second level cache again. If entity is not found in first
+  level cache and second level cache also, then database query is executed and entity is stored in both cache levels, before returning as response of load() method.  
+
+*  hibernate.connection.pool_size : 
+   It is Hibernate's own connection pooling algorithm,  quite rudimentary.It is intended to help you get started and is not intended for use in a production system, or even for 
+   performance testing. You should use a third party pool for best performance and stability. Just replace the hibernate.connection.pool_size property with connection pool specific settings.
+   This will turn off Hibernate's internal pool. For example,c3p0.  
+   
+   -> C3P0 is an open source JDBC connection pool distributed along with Hibernate in the lib directory. Hibernate will use its org.hibernate.connection.C3P0ConnectionProvider for connection pooling
+      if you set hibernate.c3p0.* properties.
+	  
+* Hibernate can use JDBC connections managed by the container and provided through JNDI. Usually, a JTA compatible TransactionManager and a ResourceManager take care of transaction management (CMT),
+  especially distributed transaction handling across several datasources.  	  
+  
+* Object/relational mappings can be defined in three approaches:
+
+  -> using Java 5 annotations (via the Java Persistence 2 annotations)
+  -> using JPA 2 XML deployment descriptors (described in chapter XXX)
+  ->using the Hibernate legacy XML files approach known as hbm.xml   
+
+* Entity
+  An entity is a regular Java object (aka POJO) which will be persisted by Hibernate.
+  
+* Java Persistence Annotations
+  -> JPA entities are plain POJOs. Actually, they are Hibernate persistent entities.
+  -> Annotations can be split in two categories, the logical mapping annotations (describing the object model, the association between two entities etc.) 
+     and the physical mapping annotations (describing the physical schema, tables, columns, indexes, etc).  
+	 
+* BLOB stands for binary large objects, which are used for storing binary data, such as an image. 
+  -> java.sql.Blob, Byte[], byte[] and serializable type will be persisted in a Blob.
+* CLOB stands for character large objects, which are used to store string data too large to be stored in a VARCHAR column. 
+  -> java.sql.Clob, Character[], char[] and java.lang.String will be persisted in a Clob. 
+* @Lob indicates that the property should be persisted in a Blob or a Clob depending on the property type:	 
+
+* We can use annotation on the field as well as on the getter method.
+
+* Transient :
+  Java's transient keyword is used to denote that a field is not to be serialized, whereas JPA's @Transient annotation is used to indicate that
+  a field is not to be persisted in the database.
+  
+* @Embedded
+  There are two types of objects in Hibernate
+  1. Value Object
+  2. Entities
+  -> Value Objects are the objects which can not stand alone for example Address if you say address people will ask whose address is this. so it can not stand alone
+  -> Entity Objects are those who can stand alone like College and Student.
+  So In case of value objects preferred way is to Embed them into an entity object.
+  -> An embeddable object inherits the access type of its owning entity.  
+  
+* @AttributeOverride:
+  -> ignore what other information you have with regard to what column it is stored in, and use the one I specify here'.
+  -> Annotations allow you to override the columns to which the embedded class's properties are mapped.  
+  
+*  @MappedSuperclass.  
+  -> This is sometimes useful to share common properties through a technical or a business superclass.@MappedSuperClass define the entity as a 
+     super class.
+
+* Hibernate Mapping
+
+1) one-to-one
+   -> For one-to-one relationship we used @OneToOne annotation
+   -> There are three cases for one-to-one associations:
+      1) Either the associated entities share the same primary keys values.
+      2) A foreign key is held by one of the entities 	  
+	  3) A association table is used to store the link between the 2 entities
+   -> JPA Cascade Types
+      1) CascadeType.PERSIST : means that save() or persist() operations cascade to related entities.
+      2) CascadeType.MERGE : means that related entities are merged into managed state when the owning entity is merged.
+      3) CascadeType.REMOVE : removes all related entities association with this setting when the owning entity is deleted.
+      4) CascadeType.DETACH : detaches all related entities if a “manual detach” occurs.
+      5) CascadeType.ALL : is shorthand for all of the above cascade operations.
+   -> The @PrimaryKeyJoinColumn annotation does say that the primary key of the entity is used as the foreign key value to the associated entity.
+   -> In One-To-One Unidirectional Shared primary key mapping, two tables share the same primary key.
+      The Unidirectional relationship means only one side navigation is possible.
+	  To apply the unidirection behaviour apply @PrimaryKeyJoinColumn annotation.
+   -> In One-To-One Bidirectional Shared primary key mapping, two tables share the same primary key.The Bidirectional relationship means navigation is possible in both direction.
+   
+   -> @JoinColumn(name="column_name")
+      -> The join column is declared with the @JoinColumn annotation which looks like the @Column annotation.
+	  @Entity
+	  public class Customer implements Serializable {
+          @JoinColumn(name="passport_fk")
+           public Passport getPassport() {
+           ...
+           }	
+      }
+      -> A Customer is linked to a Passport, with a foreign key column named passport_fk in the Customer table.	  
+	  -> This parameter declares the column in the targeted entity that will be used to the join.
+	  
+2) Many-to-one
+   -> Unidirectional Mapping:
+      In Many-To-One Unidirectional mapping, one table has a foreign key column that references the primary key of associated table.By Unidirectional relationship means only 
+	  one side navigation is possible    
+	 
