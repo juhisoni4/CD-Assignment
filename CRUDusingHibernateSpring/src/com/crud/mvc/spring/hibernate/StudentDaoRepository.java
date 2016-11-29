@@ -2,7 +2,7 @@ package com.crud.mvc.spring.hibernate;
 
 import java.util.List;
 
-public interface StudentRepository {
+public interface StudentDaoRepository {
 
 	public List<Student> listStudent();
 	

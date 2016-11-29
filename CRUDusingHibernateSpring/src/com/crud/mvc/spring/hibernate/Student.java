@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="student")
 public class Student {
 
 	@Id
@@ -70,7 +72,7 @@ public class Student {
 		this.email = email;
 	}
 
-	public StudentLoggin getStudentLoggin() {
+	public StudentLoggin getStudentLoggin(){
 		return studentLoggin;
 	}
 

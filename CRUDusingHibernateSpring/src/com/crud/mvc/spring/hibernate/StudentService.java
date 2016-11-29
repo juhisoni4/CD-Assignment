@@ -1,7 +1,7 @@
 package com.crud.mvc.spring.hibernate;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -11,30 +11,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
 public class StudentService implements StudentRepository {
 
-	@Autowired(required=true)
-	StudentDao studentDao;
-	
-	public List<Student> listStudent() {	
-		 
-		return studentDao.listStudent();
+	@Autowired
+	StudentDaoRepository studentDaoRepository;
+
+	public List<Student> listStudent() {
+		List<Student> studentList = new ArrayList<Student>();
+		studentList = studentDaoRepository.listStudent();
+		return studentList;
 	}
 
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
-	public void saveOrUpdate(Student student) {
-		
-		studentDao.saveOrUpdate(student);
+	public Student saveOrUpdate(Student student) {
+		return studentDaoRepository.saveOrUpdate(student);
 
 	}
 
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
-	public void deleteStudent(int id) {
-		
-		studentDao.getStudent(id);
+	public Student deleteStudent(String id) {
+		return studentDaoRepository.deleteStudent(id);
 	}
 
-	public Student getStudent(int id) {
-	
-		return studentDao.getStudent(id);
+	public Student getStudent(String id) {		
+		Student student = studentDaoRepository.getStudent(id);
+		return student;
 	}
 
 }
