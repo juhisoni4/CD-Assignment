@@ -10,14 +10,11 @@
 <title>Registration Form</title>
 </head>
 <body>
-<form:form action="addStudent" modelAttribute="student">
-	<c:if test = "${student.id != 0}"> 
-	<input type="hidden" name="id" value="${student.id}"/> 
-	</c:if>
-	First Name:<input type="text" name="firstName" value="${student.firstName}"/><br>
-	Last Name:<input type="text" name="lastName" value="${student.lastName}"/><br>
-	Email:<input type="text" name="email" value="${student.email}"/><br>
+<form:form action="loggin" modelAttribute="studentLoggin">	
+	User Name:<input type="text" name="userName" value="${studentLoggin.userName}"/><br/>
+	Password:<input type="password" name="password" value="${studentLoggin.password}"/><br/>
 	<input type="submit" value="submit">
 	</form:form>
+
 </body>
 </html>

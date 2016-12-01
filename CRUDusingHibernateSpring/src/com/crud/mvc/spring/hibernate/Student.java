@@ -15,7 +15,7 @@ public class Student {
 	@Id
 	@GeneratedValue
 	@Column(name="id")
-	private int id;	
+	private Integer id;	
 	
 	@Column(name="firstName")
 	private String firstName;
@@ -33,18 +33,18 @@ public class Student {
 		
 	}
 
-	public Student(int id, String firstName, String lastName, String email) {
+	public Student(Integer id, String firstName, String lastName, String email) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

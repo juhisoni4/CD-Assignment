@@ -6,9 +6,13 @@ public interface StudentDaoRepository {
 
 	public List<Student> listStudent();
 	
-	public Student saveOrUpdate(Student student);
+	public void saveOrUpdate(Student student);
 	
-	public Student deleteStudent(String id);
+//	public void save(Student student);
+//	
+//	public void update(Student student);
+	
+	public void deleteStudent(String id);
 	
 	public Student getStudent(String id);
 	
