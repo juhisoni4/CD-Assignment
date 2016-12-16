@@ -21,14 +21,26 @@ public class StudentService implements StudentRepository {
 	}
 
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
-	public Student saveOrUpdate(Student student) {
-		return studentDaoRepository.saveOrUpdate(student);
+	public void saveOrUpdate(Student student) {
+		 studentDaoRepository.saveOrUpdate(student);
 
 	}
+	
+//	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+//	public void save(Student student) {
+//		 studentDaoRepository.save(student);
+//
+//	}
+//	
+//	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
+//	public void update(Student student) {
+//		 studentDaoRepository.update(student);
+//
+//	}
 
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
-	public Student deleteStudent(String id) {
-		return studentDaoRepository.deleteStudent(id);
+	public void deleteStudent(String id) {
+		studentDaoRepository.deleteStudent(id);
 	}
 
 	public Student getStudent(String id) {		

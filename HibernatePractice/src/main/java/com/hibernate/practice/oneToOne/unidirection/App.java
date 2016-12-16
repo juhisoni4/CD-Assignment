@@ -1,5 +1,6 @@
 package com.hibernate.practice.oneToOne.unidirection;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -8,7 +9,7 @@ public class App {
 
 	public static void main(String[] args) {
 
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml1").buildSessionFactory();
+		SessionFactory factory = new Configuration().configure("hibernate.cfg1.xml").buildSessionFactory();
 
 		Session session = factory.openSession();
 
@@ -21,6 +22,17 @@ public class App {
 		session.beginTransaction();
 		session.save(student1);
 		session.save(student2);
+		
+		
+//		Student student = (Student) session.get(Student.class, 1);
+//		session.lock(student, LockMode.UPGRADE);
+//		 
+//		session.createQuery("from Student student" +
+//		" where student.id = ?")
+//		.setParameter(0, student.getId() )
+//		.uniqueResult();
+	
+	
 		
 		Student tempStudent = (Student)session.get(Student.class, 1);
 		

@@ -20,13 +20,13 @@
 		<property name="show_sql">true</property>
 
 		<!-- Drop and recreate the datbase schema -->
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">create</property>
 		
 		<!-- Set the current session context -->
 		<property name="current_session_context_class">thread</property>
 		
-		<mapping class="com.hibernate.practice.oneToOne.Address" />
-		<mapping class="com.hibernate.practice.oneToOne.Student" />
+		<mapping class="com.hibernate.practice.oneToOne.unidirection.Address" />
+		<mapping class="com.hibernate.practice.oneToOne.unidirection.Student" />
 		
 	</session-factory>
 </hibernate-configuration>        

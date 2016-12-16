@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
 public class StudentDao implements StudentDaoRepository{
 
 	@Autowired
@@ -25,18 +24,22 @@ public class StudentDao implements StudentDaoRepository{
 		return studentList;
 	}
 	
-	public  Student saveOrUpdate(Student student) {		
-		 factory.getCurrentSession().saveOrUpdate(student);
-		return student;	
+	public  void saveOrUpdate(Student student) {	
+		factory.getCurrentSession().saveOrUpdate(student);		
 	}
+	
+	
+//	public  void save(Student student) {	
+//		factory.getCurrentSession().save(student);			
+//	}
+//
+//	public  void update(Student student) {	
+//		factory.getCurrentSession().update(student);		
+//	}
 
-
-	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
-	public Student deleteStudent(String id){		
+	public void deleteStudent(String id){		
 		Student student = getStudent(id);		
-		factory.getCurrentSession().delete(student);
-		return student;
-		
+		factory.getCurrentSession().delete(student);		
 	}
 
 	public Student getStudent(String id) {		
@@ -46,4 +49,5 @@ public class StudentDao implements StudentDaoRepository{
 		return student;
 		
 	}
+
 }
