@@ -10,7 +10,7 @@
 	<context:property-placeholder location="classpath:database.properties" />
 	<context:annotation-config></context:annotation-config>
 	<mvc:annotation-driven />
-	<context:component-scan base-package="com.finance.reporting.tool"></context:component-scan>
+	<context:component-scan base-package="com.frt"></context:component-scan>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -38,17 +38,17 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>com.finance.reporting.tool.model.Client
+				<value>com.frt.model.Client
 				</value>
-				<value>com.finance.reporting.tool.model.FinancialData
+				<value>com.frt.model.FinancialData
 				</value>
-				<value>com.finance.reporting.tool.model.ManagementTeam
+				<value>com.frt.model.ManagementTeam
 				</value>
-				<value>com.finance.reporting.tool.model.Project
+				<value>com.frt.model.Project
 				</value>
-				<value>com.finance.reporting.tool.model.ProjectResource
+				<value>com.frt.model.ProjectResource
 				</value>
-				<value>com.finance.reporting.tool.model.SubProject
+				<value>com.frt.model.SubProject
 				</value>
 			</list>
 		</property>
