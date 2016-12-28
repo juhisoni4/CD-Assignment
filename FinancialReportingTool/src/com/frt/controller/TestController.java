@@ -156,6 +156,7 @@ public class TestController {
 
 		financialData7.setProject(project3);
 		financialData7.setProjectResource(projectResource7);
+		financialData7.setClient(client3);
 
 		List<ProjectResource> projectResourcesList3 = new ArrayList<>();
 		projectResourcesList3.add(projectResource7);
@@ -184,6 +185,14 @@ public class TestController {
 		financialData4.setProject(project2);
 		financialData5.setProject(project2);
 		financialData6.setProject(project2);
+		
+		financialData4.setClient(client2);
+		financialData5.setClient(client2);
+		financialData6.setClient(client2);
+		
+		financialData4.setSubProject(subProject4);
+		financialData5.setSubProject(subProject5);
+		financialData6.setSubProject(subProject6);
 
 		financialData4.setProjectResource(projectResource4);
 		financialData5.setProjectResource(projectResource5);
@@ -220,6 +229,14 @@ public class TestController {
 		financialData2.setProject(project1);
 		financialData3.setProject(project1);
 
+		financialData1.setClient(client1);
+		financialData2.setClient(client1);
+		financialData3.setClient(client1);
+		
+		financialData1.setSubProject(subProject1);
+		financialData2.setSubProject(subProject2);
+		financialData3.setSubProject(subProject3);
+		
 		financialData1.setProjectResource(projectResource1);
 		financialData2.setProjectResource(projectResource2);
 		financialData3.setProjectResource(projectResource3);
