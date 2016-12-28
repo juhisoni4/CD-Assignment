@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "project")
 public class Project implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,7 +42,7 @@ public class Project implements Serializable {
 
 	private String stream;
 
-	private String endPeriod;
+	private Date endPeriod;
 
 	private String qb;
 
@@ -52,36 +51,25 @@ public class Project implements Serializable {
 	private String requestedBy;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	// @JoinTable(name = "project_projectResource", joinColumns = {
-	// @JoinColumn(name = "project_id", referencedColumnName = "id") },
-	// inverseJoinColumns = { @JoinColumn(name = "projectResource_id",
-	// referencedColumnName = "id") })
 	private List<ProjectResource> projectResourcesList;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<SubProject> subProjectList;
-
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<ManagementTeam> managementTeamList;
-
+	
 	public Project() {
 
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public Project(String projectNamePerQB, String projectNamePerQuest,
-			String sourceOfBusiness, boolean isProjectNew, String natureOfDeal,
-			boolean isOnsite, String technology, String subTechnology,
-			String stream, String endPeriod, String qb, String groupSkill,
-			String requestedBy) {
+	
+	public Project(String projectNamePerQB,
+			String projectNamePerQuest, boolean isProjectNew,
+			String natureOfDeal, String sourceOfBusiness, boolean isOnsite,
+			String technology, String subTechnology, String stream,
+			Date endPeriod, String qb, String groupSkill, String requestedBy) {
 		this.projectNamePerQB = projectNamePerQB;
 		this.projectNamePerQuest = projectNamePerQuest;
-		this.sourceOfBusiness = sourceOfBusiness;
 		this.isProjectNew = isProjectNew;
 		this.natureOfDeal = natureOfDeal;
+		this.sourceOfBusiness = sourceOfBusiness;
 		this.isOnsite = isOnsite;
 		this.technology = technology;
 		this.subTechnology = subTechnology;
@@ -90,6 +78,11 @@ public class Project implements Serializable {
 		this.qb = qb;
 		this.groupSkill = groupSkill;
 		this.requestedBy = requestedBy;
+	}
+
+
+	public Long getId() {
+		return id;
 	}
 
 	public void setId(Long id) {
@@ -158,15 +151,7 @@ public class Project implements Serializable {
 
 	public void setStream(String stream) {
 		this.stream = stream;
-	}
-
-	public String getEndPeriod() {
-		return endPeriod;
-	}
-
-	public void setEndPeriod(String endPeriod) {
-		this.endPeriod = endPeriod;
-	}
+	}	
 
 	public String getQb() {
 		return qb;
@@ -191,6 +176,14 @@ public class Project implements Serializable {
 	public void setRequestedBy(String requestedBy) {
 		this.requestedBy = requestedBy;
 	}
+	
+	public Date getEndPeriod() {
+		return endPeriod;
+	}
+
+	public void setEndPeriod(Date endPeriod) {
+		this.endPeriod = endPeriod;
+	}
 
 	public List<ProjectResource> getProjectResourcesList() {
 		return projectResourcesList;
@@ -207,15 +200,7 @@ public class Project implements Serializable {
 
 	public void setSubProjectList(List<SubProject> subProjectList) {
 		this.subProjectList = subProjectList;
-	}
-
-	public List<ManagementTeam> getManagementTeamList() {
-		return managementTeamList;
-	}
-
-	public void setManagementTeamList(List<ManagementTeam> managementTeamList) {
-		this.managementTeamList = managementTeamList;
-	}
+	}	
 
 	public String getSourceOfBusiness() {
 		return sourceOfBusiness;
@@ -224,17 +209,5 @@ public class Project implements Serializable {
 	public void setSourceOfBusiness(String sourceOfBusiness) {
 		this.sourceOfBusiness = sourceOfBusiness;
 	}
-
-	@Override
-	public String toString() {
-		return "Project [id=" + id + ", projectNamePerQB=" + projectNamePerQB
-				+ ", projectNamePerQuest=" + projectNamePerQuest
-				+ ", isProjectNew=" + isProjectNew + ", natureOfDeal="
-				+ natureOfDeal + ", sourceOfBusiness=" + sourceOfBusiness
-				+ ", isOnsite=" + isOnsite + ", technology=" + technology
-				+ ", subTechnology=" + subTechnology + ", stream=" + stream
-				+ ", endPeriod=" + endPeriod + ", qb=" + qb + ", groupSkill="
-				+ groupSkill + ", requestedBy=" + requestedBy + "]";
-	}	
 
 }

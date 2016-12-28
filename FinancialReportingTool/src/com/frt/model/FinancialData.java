@@ -7,28 +7,33 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-
 @Entity
-public class FinancialData implements Serializable{
+public class FinancialData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String month;
-	
+
 	private Integer year;
 
-	private String startDate;
-	
-	private String endDate;
-	
+	private Date startDate;
+
+	private Date endDate;
+
+	private String projectManager;
+
+	private String salesHead;
+
+	private String salesPerson;
+
+	private String deliveryHead;
+
 	private Integer hrs_days;
 
 	private Double actualRevenue;
@@ -48,36 +53,39 @@ public class FinancialData implements Serializable{
 	private Double actualProjectMarginYear;
 
 	private Double actualMarginPercentageYear;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Project project;
-	
-	//@OneToOne(cascade = CascadeType.ALL)
-	//private ManagementTeam managementTeam;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private ProjectResource projectResource;
-	
-	//@OneToOne(cascade = CascadeType.ALL)
-	//private Client client;
-		
-	//@OneToOne(cascade = CascadeType.ALL)
-	//private SubProject subProject;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Client client;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private SubProject subProject;
 
 	public FinancialData() {
 
-	}	
-
-	public FinancialData(String month, Integer year, String startDate,
-			String endDate, Integer hrs_days, Double actualRevenue,
-			Double actualCost, Double actualProjectMargin,
-			Double actualMarginPercentage, Integer hrs_daysYear,
-			Double actualRevenueYear, Double actualCostYear,
-			Double actualProjectMarginYear, Double actualMarginPercentageYear) {
+	}
+	
+	public FinancialData(String month, Integer year, Date startDate,
+			Date endDate, String projectManager, String salesHead,
+			String salesPerson, String deliveryHead, Integer hrs_days,
+			Double actualRevenue, Double actualCost,
+			Double actualProjectMargin, Double actualMarginPercentage,
+			Integer hrs_daysYear, Double actualRevenueYear,
+			Double actualCostYear, Double actualProjectMarginYear,
+			Double actualMarginPercentageYear) {
 		this.month = month;
 		this.year = year;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.projectManager = projectManager;
+		this.salesHead = salesHead;
+		this.salesPerson = salesPerson;
+		this.deliveryHead = deliveryHead;
 		this.hrs_days = hrs_days;
 		this.actualRevenue = actualRevenue;
 		this.actualCost = actualCost;
@@ -88,9 +96,7 @@ public class FinancialData implements Serializable{
 		this.actualCostYear = actualCostYear;
 		this.actualProjectMarginYear = actualProjectMarginYear;
 		this.actualMarginPercentageYear = actualMarginPercentageYear;
-	}	
-
-	
+	}
 
 	public Long getId() {
 		return id;
@@ -116,19 +122,19 @@ public class FinancialData implements Serializable{
 		this.year = year;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -220,13 +226,37 @@ public class FinancialData implements Serializable{
 		this.project = project;
 	}
 
-	/*public ManagementTeam getManagementTeam() {
-		return managementTeam;
+	public String getProjectManager() {
+		return projectManager;
 	}
 
-	public void setManagementTeam(ManagementTeam managementTeam) {
-		this.managementTeam = managementTeam;
-	}*/
+	public void setProjectManager(String projectManager) {
+		this.projectManager = projectManager;
+	}
+
+	public String getSalesHead() {
+		return salesHead;
+	}
+
+	public void setSalesHead(String salesHead) {
+		this.salesHead = salesHead;
+	}
+
+	public String getSalesPerson() {
+		return salesPerson;
+	}
+
+	public void setSalesPerson(String salesPerson) {
+		this.salesPerson = salesPerson;
+	}
+
+	public String getDeliveryHead() {
+		return deliveryHead;
+	}
+
+	public void setDeliveryHead(String deliveryHead) {
+		this.deliveryHead = deliveryHead;
+	}
 
 	public ProjectResource getProjectResource() {
 		return projectResource;
@@ -236,35 +266,20 @@ public class FinancialData implements Serializable{
 		this.projectResource = projectResource;
 	}
 
-	@Override
-	public String toString() {
-		return "FinancialData [id=" + id + ", month=" + month + ", year="
-				+ year + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", hrs_days=" + hrs_days + ", actualRevenue=" + actualRevenue
-				+ ", actualCost=" + actualCost + ", actualProjectMargin="
-				+ actualProjectMargin + ", actualMarginPercentage="
-				+ actualMarginPercentage + ", hrs_daysYear=" + hrs_daysYear
-				+ ", actualRevenueYear=" + actualRevenueYear
-				+ ", actualCostYear=" + actualCostYear
-				+ ", actualProjectMarginYear=" + actualProjectMarginYear
-				+ ", actualMarginPercentageYear=" + actualMarginPercentageYear
-				+ "]";
-	}
-
-	/*public Client getClient() {
+	public Client getClient() {
 		return client;
 	}
 
 	public void setClient(Client client) {
 		this.client = client;
-	}*/
+	}
 
-	/*public SubProject getSubProject() {
+	public SubProject getSubProject() {
 		return subProject;
 	}
 
 	public void setSubProject(SubProject subProject) {
 		this.subProject = subProject;
-	}*/
-			
+	}
+
 }
