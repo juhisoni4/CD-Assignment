@@ -9,12 +9,18 @@
 
 	<context:property-placeholder location="classpath:database.properties" />
 	<context:annotation-config></context:annotation-config>
-	<mvc:annotation-driven />
 	<context:component-scan base-package="com.frt"></context:component-scan>
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/view/"></property>
+		<property name="prefix" value="/resources/view/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
@@ -22,9 +28,9 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="factory" />
 	</bean>
-	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${database.driver}" />
@@ -41,8 +47,6 @@
 				<value>com.frt.model.Client
 				</value>
 				<value>com.frt.model.FinancialData
-				</value>
-				<value>com.frt.model.ManagementTeam
 				</value>
 				<value>com.frt.model.Project
 				</value>
