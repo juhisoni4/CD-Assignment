@@ -1,16 +1,15 @@
 package com.frt.repository.impl;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.frt.model.FinancialData;
-import com.frt.model.ManagementTeam;
 import com.frt.repository.FinancialDataRepository;
-import com.frt.repository.ManagementTeamRepositry;
+
 
 @Repository
 public class FinancialDataRepositoryImpl implements FinancialDataRepository{
