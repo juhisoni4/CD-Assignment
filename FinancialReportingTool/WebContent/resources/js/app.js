@@ -7,14 +7,13 @@
 		$http.get("http://localhost:8080/FinancialReportingTool/list").success(
 				function(data) {
 					$scope.revenue = data;
-					var parsed = $scope.revenue;
-					var arr = JSON.parse(parsed);
+					var data1 = $scope.revenue;
+					//var arr = JSON.parse(parsed);
 
 					var data = [];
-
-					for(var x in parsed){
-					  data.push(parsed[x]);
-					}
+				
+					data.push(data1);
+				
 					console.log(data);
 					var margin = {top: 20, right: 20, bottom: 70, left: 40},
 				    width = 600 - margin.left - margin.right,
@@ -49,7 +48,13 @@
 				    .attr("transform", 
 				          "translate(" + margin.left + "," + margin.top + ")");
 			
-
+				/*d3.json(data, function(error, data) {
+					 
+				    data.forEach(function(d) {
+				       d.Month = d.Month;
+				       d.Revenue = +d.Revenue;
+				    });
+				});*/
 				
 				
 				  // scale the range of the data
