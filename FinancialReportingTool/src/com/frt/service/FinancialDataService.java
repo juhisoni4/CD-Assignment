@@ -1,6 +1,7 @@
 package com.frt.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.frt.model.FinancialData;
 
@@ -11,4 +12,6 @@ public interface FinancialDataService {
 	public FinancialData getFinanceDataById(Long id);
 
 	public List<FinancialData> getAllFinanceData();
+	
+	public Map<String, String> getRevenueByProjectManager(String projectManager);
 }

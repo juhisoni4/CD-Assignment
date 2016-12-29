@@ -1,7 +1,9 @@
 package com.frt.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,14 @@ public class FinancialDataServiceImpl implements FinancialDataService {
 		List<FinancialData> financialDataList = new ArrayList<>();
 		financialDataList = financialDataRepository.getAlladdFinanceData();	
 		return financialDataList;
+	}
+
+	@Override
+	public Map<String, String> getRevenueByProjectManager(String projectManager) {
+		
+		Map<String, String> totalRevenue = new HashMap<>();
+		totalRevenue = financialDataRepository.getRevenueByProjectManager(projectManager);
+		return totalRevenue;
 	}
 
 }

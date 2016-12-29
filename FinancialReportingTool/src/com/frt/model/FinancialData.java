@@ -21,11 +21,7 @@ public class FinancialData implements Serializable {
 	private String month;
 
 	private Integer year;
-
-	private Date startDate;
-
-	private Date endDate;
-
+	
 	private String projectManager;
 
 	private String salesHead;
@@ -70,8 +66,7 @@ public class FinancialData implements Serializable {
 
 	}
 	
-	public FinancialData(String month, Integer year, Date startDate,
-			Date endDate, String projectManager, String salesHead,
+	public FinancialData(String month, Integer year, String projectManager, String salesHead,
 			String salesPerson, String deliveryHead, Integer hrs_days,
 			Double actualRevenue, Double actualCost,
 			Double actualProjectMargin, Double actualMarginPercentage,
@@ -80,8 +75,6 @@ public class FinancialData implements Serializable {
 			Double actualMarginPercentageYear) {
 		this.month = month;
 		this.year = year;
-		this.startDate = startDate;
-		this.endDate = endDate;
 		this.projectManager = projectManager;
 		this.salesHead = salesHead;
 		this.salesPerson = salesPerson;
@@ -120,23 +113,7 @@ public class FinancialData implements Serializable {
 
 	public void setYear(Integer year) {
 		this.year = year;
-	}
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+	}	
 
 	public Integer getHrs_days() {
 		return hrs_days;
