@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,10 @@ import com.frt.repository.FinancialDataRepository;
 public class FinancialDataRepositoryImpl implements FinancialDataRepository {
 
 	@Autowired
-	public SessionFactory factory;
+	SessionFactory factory;
+
+	/*@Autowired
+	FinancialData financialData;*/
 
 	@Override
 	public void saveFinanceData(FinancialData financialData) {
@@ -42,28 +47,22 @@ public class FinancialDataRepositoryImpl implements FinancialDataRepository {
 		return financialDataList;
 	}
 
-	public Map<String, String> getRevenueByProjectManager(String projectManager) {
-		
-		Double totalRevenue = 0.00;
-		String month = "";
-					
- 		Criteria criteria = factory.getCurrentSession().createCriteria(
-				FinancialData.class);
-		criteria.add(Restrictions.eq("projectManager", projectManager));
-		List<FinancialData> list = criteria.list();
-		for (FinancialData data : list) {
-			month = data.getMonth();
-			Double revenueData = data.getActualRevenue();
-			totalRevenue = totalRevenue + revenueData;
-			System.out.println(totalRevenue);
-		}
-		
-		String totalRevenueStr = Double.toString(totalRevenue);
-		Map<String, String>  revenueData = new HashMap<>();
-		revenueData.put("Month",month);
-		revenueData.put("ProjectManager",projectManager);
-		revenueData.put("Revenue",totalRevenueStr);
-		return revenueData;
-	}
+	public List<FinancialData> getRevenueByProjectManager(String month1,
+			String month2, Integer year, String managementTeam,
+			String managementTeamPersonName) {
 
+		String hql = "from FinancialData WHERE month BETWEEN :month1 AND :month2 AND year = :year AND "
+				+ managementTeam + " = :managementTeamPerson";
+		Session session = factory.getCurrentSession();
+		Query query = session.createQuery(hql);
+		query.setParameter("month1", month1);
+		query.setParameter("month2", month2);
+		query.setParameter("year", year);
+		query.setParameter("managementTeamPerson", managementTeamPersonName);
+		List<FinancialData> financeDatalist = query.list();
+		System.out.println(financeDatalist);
+
+		return financeDatalist;
+	}
+	
 }

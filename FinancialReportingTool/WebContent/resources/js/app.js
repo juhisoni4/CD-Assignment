@@ -4,15 +4,20 @@
 	
 	function myController($scope, $http) {
 		console.log("In controller");
-		$http.get("http://localhost:8080/FinancialReportingTool/list").success(
+		$http.get("http://localhost:8080/FinancialReportingTool/financeData/list").success(
 				function(data) {
 					$scope.revenue = data;
-					var data1 = $scope.revenue;
-					//var arr = JSON.parse(parsed);
-
-					var data = [];
-				
-					data.push(data1);
+					var data1 = data;
+					var data = [];	
+					
+					for(var prop in data1){						
+						var myData = new Object();
+						myData.Month = prop,
+						myData.Revenue = data1[prop];
+						console.log(prop+":"+data1[prop]);
+						data.push(myData);
+						console.log(myData);
+					}		
 				
 					console.log(data);
 					var margin = {top: 20, right: 20, bottom: 70, left: 40},
@@ -89,7 +94,8 @@
 				    .enter().append("rect")
 				      .attr("class", "bar")
 				      .attr("x", function(d) { return x(d.Month); })
-				      .attr("width", x.rangeBand())
+				     .attr("width", x.rangeBand())
+				     // .attr("width", Math.min(x.rangeBand()-2, 30))
 				      .attr("y", function(d) { return y(d.Revenue); })
 				      .attr("height", function(d) { return height - y(d.Revenue); })
 				        

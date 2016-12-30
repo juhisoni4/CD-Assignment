@@ -43,10 +43,10 @@ public class FinancialDataServiceImpl implements FinancialDataService {
 	}
 
 	@Override
-	public Map<String, String> getRevenueByProjectManager(String projectManager) {
+	public List<FinancialData> getRevenueByProjectManager(String month1, String month2,Integer year,String managementTeam, String managementTeamPersonName) {
 		
-		Map<String, String> totalRevenue = new HashMap<>();
-		totalRevenue = financialDataRepository.getRevenueByProjectManager(projectManager);
+		List<FinancialData> totalRevenue = new ArrayList<>();
+		totalRevenue = financialDataRepository.getRevenueByProjectManager(month1,  month2, year, managementTeam, managementTeamPersonName);
 		return totalRevenue;
 	}
 

@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.frt.model.Client;
 import com.frt.model.FinancialData;
 
@@ -32,13 +31,12 @@ import com.frt.service.ProjectService;
 import com.frt.service.SubProjectService;
 import com.mysql.fabric.xmlrpc.base.Array;
 
-
-@RestController
+//@RestController
 public class TestController {
 
 	@Autowired
 	ClientService clientService;
-	
+
 	@Autowired
 	HttpServletResponse response;
 
@@ -57,16 +55,15 @@ public class TestController {
 	@Autowired
 	HttpServletRequest request;
 
-
 	Project project1 = new Project("IBM Portal", "IBM User Management Portal",
-			true,"EE","Managed T&M", true, "portal", "liferay", "consulting",
+			true, "EE", "Managed T&M", true, "portal", "liferay", "consulting",
 			new Date(), "USA", "Java", "Vishal");
 
-	Project project2 = new Project("Apple IOS game", "Apple IOS game",
-			true,"EE","Fixed Bid", true, "portal", "liferay", "consulting",
+	Project project2 = new Project("Apple IOS game", "Apple IOS game", true,
+			"EE", "Fixed Bid", true, "portal", "liferay", "consulting",
 			new Date(), "INDIA", "IOS", "Vishal");
 
-	Project project3 = new Project("Licence", "Licence",false,"NN",
+	Project project3 = new Project("Licence", "Licence", false, "NN",
 			"Licence", false, "Magento Licence", "Magento Licence", "Licence",
 			new Date(), "USA", "Licence", "Vishal");
 
@@ -102,77 +99,187 @@ public class TestController {
 	SubProject subProject5 = new SubProject("IOS");
 	SubProject subProject6 = new SubProject("UX");
 
-	FinancialData financialData1 = new FinancialData("april", 2016,"Anand Shah",
-			"Paul Anthony", "Paul Anthony", "Srinivas Tadeparti", 30, 10000.00, 5940.00, 4060.00, 40.60,
-			120, 55000.00, 26000.00, 29000.00, 52.73);
-	FinancialData financialData2 = new FinancialData("april", 2016,"Anand Shah",
-			"Paul Anthony", "Paul Anthony", "Srinivas Tadeparti", 28, 9400.00, 5940.00, 3460.00, 36.81,
-			110, 52000.00, 24000.00, 28000.00, 55.73);
-	FinancialData financialData3 = new FinancialData("april", 2016,"Anand Shah",
-			"Paul Anthony", "Paul Anthony", "Srinivas Tadeparti",29, 9600.00, 5940.00, 3460.00, 36.81,
-			110, 52000.00, 24000.00, 28000.00, 55.73);
-	FinancialData financialData4 = new FinancialData("may", 2016,"Anand Shah",
-			"Paul Anthony", "Paul Anthony", "Srinivas Tadeparti", 30, 10000.00, 5940.00, 4060.00, 40.60,
-			120, 55000.00, 26000.00, 29000.00, 52.73);
-	FinancialData financialData5 = new FinancialData("may", 2016,"Anand Shah",
-			"Paul Anthony", "Paul Anthony", "Srinivas Tadeparti", 28, 9400.00, 5940.00, 3460.00, 36.81,
-			110, 52000.00, 24000.00, 28000.00, 55.73);
-	FinancialData financialData6 = new FinancialData("may", 2016,"Anand Shah",
-			"Paul Anthony", "Paul Anthony", "Srinivas Tadeparti",29, 9600.00, 5940.00, 3460.00, 36.81,
-			110, 52000.00, 24000.00, 28000.00, 55.73);
-	FinancialData financialData7 = new FinancialData("april", 2016,"Jogen G", "Ashish T",
-			"Ashish T", "PKV Sastry",30, 15000.00, 6200.00, 8800.00, 58.61,
-			120, 55000.00, 26000.00, 29000.00, 52.73);
-	FinancialData financialData8 = new FinancialData("april", 2016,"Jogen G",
-			"Paul Anthony", "Paul Anthony", "PKV Sastry",30, 14200.00, 6200.00, 8000.00, 56.36,
-			120, 55000.00, 26000.00, 29000.00, 52.73);
-	FinancialData financialData9 = new FinancialData("april", 2016,"Jogen G",
-			"Paul Anthony", "Paul Anthony", "PKV Sastry", 30, 9000.00, 5200.00, 3800.00, 42.22,
-			120, 55000.00, 26000.00, 29000.00, 52.73);
-	FinancialData financialData10 = new FinancialData("may", 2016,"Kruti Shah",
-			"Paul Anthony", "Paul Anthony", "PKV Sastry",30, 14200.00, 6200.00, 8000.00, 56.36,
-			120, 55000.00, 26000.00, 29000.00, 52.73);
-	FinancialData financialData11 = new FinancialData("may", 2016,"Kruti Shah",
-			"Paul Anthony", "Paul Anthony", "PKV Sastry", 30, 9000.00, 5200.00, 3800.00, 42.22,
-			120, 55000.00, 26000.00, 29000.00, 52.73);
-	FinancialData financialData12 = new FinancialData("may", 2016,"Kruti Shah",
-			"Paul Anthony", "Paul Anthony", "PKV Sastry", 30, 9000.00, 5200.00, 3800.00, 42.22,
-			120, 55000.00, 26000.00, 29000.00, 52.73);
-	FinancialData financialData13 = new FinancialData("april", 2016,"Jogen G", "Pinkal K",
-			"Pinkal K", "PKV Sastry",0, 0.00, 0.00, 0.00, 0.00, 0, 0.00,
-			0.00, 0.00, 0.00);
-	FinancialData financialData14 = new FinancialData("may", 2016,"Jogen G", "Pinkal K",
-			"Pinkal K", "PKV Sastry",0, 0.00, 0.00, 0.00, 0.00, 0, 0.00,
-			0.00, 0.00, 0.00);
+	FinancialData financialData1 = new FinancialData("april", 2016,
+			"Anand Shah", "Paul Anthony", "Paul Anthony", "Srinivas Tadeparti",
+			30, 10000.00, 5940.00, 4060.00, 40.60, 120, 55000.00, 26000.00,
+			29000.00, 52.73);
+	FinancialData financialData2 = new FinancialData("april", 2016,
+			"Anand Shah", "Paul Anthony", "Paul Anthony", "Srinivas Tadeparti",
+			28, 9400.00, 5940.00, 3460.00, 36.81, 110, 52000.00, 24000.00,
+			28000.00, 55.73);
+	FinancialData financialData3 = new FinancialData("april", 2016,
+			"Anand Shah", "Paul Anthony", "Paul Anthony", "Srinivas Tadeparti",
+			29, 9600.00, 5940.00, 3460.00, 36.81, 110, 52000.00, 24000.00,
+			28000.00, 55.73);
+	FinancialData financialData4 = new FinancialData("may", 2016, "Anand Shah",
+			"Paul Anthony", "Paul Anthony", "Srinivas Tadeparti", 30, 10000.00,
+			5940.00, 4060.00, 40.60, 120, 55000.00, 26000.00, 29000.00, 52.73);
+	FinancialData financialData5 = new FinancialData("may", 2016, "Anand Shah",
+			"Paul Anthony", "Paul Anthony", "Srinivas Tadeparti", 28, 9400.00,
+			5940.00, 3460.00, 36.81, 110, 52000.00, 24000.00, 28000.00, 55.73);
+	FinancialData financialData6 = new FinancialData("may", 2016, "Anand Shah",
+			"Paul Anthony", "Paul Anthony", "Srinivas Tadeparti", 29, 9600.00,
+			5940.00, 3460.00, 36.81, 110, 52000.00, 24000.00, 28000.00, 55.73);
+	FinancialData financialData7 = new FinancialData("april", 2016, "Jogen G",
+			"Ashish T", "Ashish T", "PKV Sastry", 30, 15000.00, 6200.00,
+			8800.00, 58.61, 120, 55000.00, 26000.00, 29000.00, 52.73);
+	FinancialData financialData8 = new FinancialData("april", 2016, "Jogen G",
+			"Paul Anthony", "Paul Anthony", "PKV Sastry", 30, 14200.00,
+			6200.00, 8000.00, 56.36, 120, 55000.00, 26000.00, 29000.00, 52.73);
+	FinancialData financialData9 = new FinancialData("april", 2016, "Jogen G",
+			"Paul Anthony", "Paul Anthony", "PKV Sastry", 30, 9000.00, 5200.00,
+			3800.00, 42.22, 120, 55000.00, 26000.00, 29000.00, 52.73);
+	FinancialData financialData10 = new FinancialData("may", 2016,
+			"Kruti Shah", "Paul Anthony", "Paul Anthony", "PKV Sastry", 30,
+			14200.00, 6200.00, 8000.00, 56.36, 120, 55000.00, 26000.00,
+			29000.00, 52.73);
+	FinancialData financialData11 = new FinancialData("may", 2016,
+			"Kruti Shah", "Paul Anthony", "Paul Anthony", "PKV Sastry", 30,
+			9000.00, 5200.00, 3800.00, 42.22, 120, 55000.00, 26000.00,
+			29000.00, 52.73);
+	FinancialData financialData12 = new FinancialData("may", 2016,
+			"Kruti Shah", "Paul Anthony", "Paul Anthony", "PKV Sastry", 30,
+			9000.00, 5200.00, 3800.00, 42.22, 120, 55000.00, 26000.00,
+			29000.00, 52.73);
+	FinancialData financialData13 = new FinancialData("april", 2016, "Jogen G",
+			"Pinkal K", "Pinkal K", "PKV Sastry", 0, 0.00, 0.00, 0.00, 0.00, 0,
+			0.00, 0.00, 0.00, 0.00);
+	FinancialData financialData14 = new FinancialData("may", 2016, "Jogen G",
+			"Pinkal K", "Pinkal K", "PKV Sastry", 0, 0.00, 0.00, 0.00, 0.00, 0,
+			0.00, 0.00, 0.00, 0.00);
 
+	// uncomment the code to save the data
+	/*
+	 * @RequestMapping(value = "/") public String projectData() {
+	 * 
+	 * projectx();
+	 * 
+	 * projecty();
+	 * 
+	 * projectz();
+	 * 
+	 * return "index";
+	 * 
+	 * }
+	 */
 
-	//uncomment the code to save the data
-	/*@RequestMapping(value = "/")
-	public String projectData() {
+	//@RequestMapping(value = "/list")
+	public Map<String, Double> getFinanceDataByManagementTeamPerson(
+			String ManagementTeamPerson, String typeOfData) {
 
-		projectx();
+		List<FinancialData> financeDataList = new ArrayList<>();
+		Map<String, Double> revenueOfManagementTeamPerson = new HashMap<>();
+		String typeOfFinanceData = "Margin";
 
-		projecty();
+		Double totalFinanceDataPerJanuary = 0.0;
+		Double totalFinanceDataPerFebruary = 0.0;
+		Double totalFinanceDataPerMarch = 0.0;
+		Double totalFinanceDataPerApril = 0.0;
+		Double totalFinanceDataPerMay = 0.0;
+		Double totalFinanceDataPerJune = 0.0;
+		Double totalFinanceDataPerJuly = 0.0;
+		Double totalFinanceDataPerAugust = 0.0;
+		Double totalFinanceDataPerSeptember = 0.0;
+		Double totalFinanceDataPerOctober = 0.0;
+		Double totalFinanceDataPerNovember = 0.0;
+		Double totalFinanceDataPerDecember = 0.0;
 
-		projectz();
+		financeDataList = financialDataService.getRevenueByProjectManager(
+				"april", "may", 2016, "deliveryHead", "Srinivas Tadeparti");
 
-		return "index";
+		for (FinancialData data : financeDataList) {
 
-	}*/
-	
-	@RequestMapping(value = "/list")
-	public Map<String, String> getRevenueByProjectManager(String projectManger){
-		
-		/*SubProject subProject = subProjectService.getSubProjectById(6L);
-		System.out.println(projectResourceService.getProjectResourceById(2L));
-		System.out.println(projectService.getProjectById(3L));
-		System.out.println(managementTeamService.getManagementTeamById(1L));
-		System.out.println(clientService.getClientById(3L));
-		System.out.println(subProjectService.getSubProjectById(6L));*/
-		Map<String, String> revenue = new HashMap<>();
-		revenue = financialDataService.getRevenueByProjectManager("Anand Shah");
-		return revenue ;
-	}	
+			Double financeData = 0.0;
+
+			if (typeOfFinanceData.equals("Revenue")) {
+				financeData = data.getActualRevenue();
+			} else if (typeOfFinanceData.equals("Cost")) {
+				financeData = data.getActualCost();
+			} else {
+				financeData = data.getActualMarginPercentage();
+			}
+
+			String month = data.getMonth();
+
+			switch (month) {
+
+			case "january":
+				totalFinanceDataPerJanuary += financeData;
+				revenueOfManagementTeamPerson.put("january",
+						totalFinanceDataPerJanuary);
+				break;
+
+			case "february":
+
+				totalFinanceDataPerFebruary += financeData;
+				revenueOfManagementTeamPerson.put("february",
+						totalFinanceDataPerFebruary);
+				break;
+
+			case "march":
+				totalFinanceDataPerMarch += financeData;
+				revenueOfManagementTeamPerson.put("march",
+						totalFinanceDataPerMarch);
+				break;
+
+			case "april":
+				totalFinanceDataPerApril += financeData;
+				revenueOfManagementTeamPerson.put("april",
+						totalFinanceDataPerApril);
+				break;
+
+			case "may":
+				totalFinanceDataPerMay += financeData;
+				revenueOfManagementTeamPerson
+						.put("may", totalFinanceDataPerMay);
+				break;
+
+			case "june":
+				totalFinanceDataPerJune += financeData;
+				revenueOfManagementTeamPerson.put("june",
+						totalFinanceDataPerJune);
+				break;
+
+			case "july":
+				totalFinanceDataPerJuly += financeData;
+				revenueOfManagementTeamPerson.put("july",
+						totalFinanceDataPerJuly);
+				break;
+
+			case "august":
+				totalFinanceDataPerAugust += financeData;
+				revenueOfManagementTeamPerson.put("august",
+						totalFinanceDataPerAugust);
+				break;
+
+			case "september":
+				totalFinanceDataPerSeptember += financeData;
+				revenueOfManagementTeamPerson.put("september",
+						totalFinanceDataPerSeptember);
+				break;
+
+			case "october":
+				totalFinanceDataPerOctober += financeData;
+				revenueOfManagementTeamPerson.put("october",
+						totalFinanceDataPerOctober);
+				break;
+
+			case "november":
+				totalFinanceDataPerNovember += financeData;
+				revenueOfManagementTeamPerson.put("november",
+						totalFinanceDataPerNovember);
+				break;
+
+			case "december":
+				totalFinanceDataPerDecember += financeData;
+				revenueOfManagementTeamPerson.put("december",
+						totalFinanceDataPerDecember);
+				break;
+			}
+		}
+
+		return revenueOfManagementTeamPerson;
+	}
 
 	public void projectz() {
 
@@ -219,14 +326,14 @@ public class TestController {
 		financialData10.setProject(project2);
 		financialData11.setProject(project2);
 		financialData12.setProject(project2);
-		
+
 		financialData7.setClient(client2);
 		financialData8.setClient(client2);
 		financialData9.setClient(client2);
 		financialData10.setClient(client2);
 		financialData11.setClient(client2);
 		financialData12.setClient(client2);
-		
+
 		financialData7.setSubProject(subProject4);
 		financialData8.setSubProject(subProject5);
 		financialData9.setSubProject(subProject6);
@@ -284,14 +391,14 @@ public class TestController {
 		financialData4.setClient(client1);
 		financialData5.setClient(client1);
 		financialData6.setClient(client1);
-		
+
 		financialData1.setSubProject(subProject1);
 		financialData2.setSubProject(subProject2);
 		financialData3.setSubProject(subProject3);
 		financialData4.setSubProject(subProject1);
 		financialData5.setSubProject(subProject2);
 		financialData6.setSubProject(subProject3);
-		
+
 		financialData1.setProjectResource(projectResource1);
 		financialData2.setProjectResource(projectResource2);
 		financialData3.setProjectResource(projectResource3);
@@ -310,7 +417,7 @@ public class TestController {
 		subProjectList1.add(subProject2);
 		subProjectList1.add(subProject3);
 		project1.setSubProjectList(subProjectList1);
-		
+
 		clientService.saveClient(client1);
 		projectService.saveProject(project1);
 		projectResourceService.saveProjectResource(projectResource1);

@@ -13,5 +13,5 @@ public interface FinancialDataService {
 
 	public List<FinancialData> getAllFinanceData();
 	
-	public Map<String, String> getRevenueByProjectManager(String projectManager);
+	public List<FinancialData> getRevenueByProjectManager(String month1, String month2, Integer year,String managementTeam, String managementTeamPersonName);
 }
