@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,7 +35,7 @@ public class Project implements Serializable {
 
 	private String sourceOfBusiness;
 
-	private boolean isOnsite;
+	private String type;
 
 	private String technology;
 
@@ -50,27 +51,28 @@ public class Project implements Serializable {
 
 	private String requestedBy;
 
+	@OneToOne
+	private Client client;
+
 	@ManyToMany(cascade = CascadeType.ALL)
-	private List<ProjectResource> projectResourcesList;
+	private List<FinancialData> projectResourcesList;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<SubProject> subProjectList;
-	
+
 	public Project() {
 
 	}
-	
-	public Project(String projectNamePerQB,
-			String projectNamePerQuest, boolean isProjectNew,
-			String natureOfDeal, String sourceOfBusiness, boolean isOnsite,
-			String technology, String subTechnology, String stream,
+
+	public Project(String projectNamePerQB, String projectNamePerQuest, boolean isProjectNew, String natureOfDeal,
+			String sourceOfBusiness, String type, String technology, String subTechnology, String stream,
 			Date endPeriod, String qb, String groupSkill, String requestedBy) {
 		this.projectNamePerQB = projectNamePerQB;
 		this.projectNamePerQuest = projectNamePerQuest;
 		this.isProjectNew = isProjectNew;
 		this.natureOfDeal = natureOfDeal;
 		this.sourceOfBusiness = sourceOfBusiness;
-		this.isOnsite = isOnsite;
+		this.type = type;
 		this.technology = technology;
 		this.subTechnology = subTechnology;
 		this.stream = stream;
@@ -79,7 +81,6 @@ public class Project implements Serializable {
 		this.groupSkill = groupSkill;
 		this.requestedBy = requestedBy;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -121,12 +122,12 @@ public class Project implements Serializable {
 		this.natureOfDeal = natureOfDeal;
 	}
 
-	public boolean isOnsite() {
-		return isOnsite;
+	public String getType() {
+		return type;
 	}
 
-	public void setOnsite(boolean isOnsite) {
-		this.isOnsite = isOnsite;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getTechnology() {
@@ -151,7 +152,7 @@ public class Project implements Serializable {
 
 	public void setStream(String stream) {
 		this.stream = stream;
-	}	
+	}
 
 	public String getQb() {
 		return qb;
@@ -176,7 +177,7 @@ public class Project implements Serializable {
 	public void setRequestedBy(String requestedBy) {
 		this.requestedBy = requestedBy;
 	}
-	
+
 	public Date getEndPeriod() {
 		return endPeriod;
 	}
@@ -185,12 +186,11 @@ public class Project implements Serializable {
 		this.endPeriod = endPeriod;
 	}
 
-	public List<ProjectResource> getProjectResourcesList() {
+	public List<FinancialData> getProjectResourcesList() {
 		return projectResourcesList;
 	}
 
-	public void setProjectResourcesList(
-			List<ProjectResource> projectResourcesList) {
+	public void setProjectResourcesList(List<FinancialData> projectResourcesList) {
 		this.projectResourcesList = projectResourcesList;
 	}
 
@@ -200,7 +200,7 @@ public class Project implements Serializable {
 
 	public void setSubProjectList(List<SubProject> subProjectList) {
 		this.subProjectList = subProjectList;
-	}	
+	}
 
 	public String getSourceOfBusiness() {
 		return sourceOfBusiness;
@@ -210,4 +210,11 @@ public class Project implements Serializable {
 		this.sourceOfBusiness = sourceOfBusiness;
 	}
 
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
 }
