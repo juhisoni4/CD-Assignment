@@ -1,6 +1,10 @@
 package com.frt.controller;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2845c0c7f4397e5fbb5748a7474fc6fc6bd5e6a1
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.frt.model.FinancialData;
 import com.frt.service.FinancialDataService;
+<<<<<<< HEAD
 import com.frt.util.Util;
+=======
+
+>>>>>>> 2845c0c7f4397e5fbb5748a7474fc6fc6bd5e6a1
 
 @RestController
 @RequestMapping(value = "/financeData")

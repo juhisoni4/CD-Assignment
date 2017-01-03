@@ -31,6 +31,9 @@ public class Client implements Serializable{
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Project> projectList;
+	
+	@OneToMany
+	private List<FinancialData> financeDataList;
 			
 	public Client() {
 		
@@ -90,6 +93,15 @@ public class Client implements Serializable{
 
 	public void setProjectList(List<Project> projectList) {
 		this.projectList = projectList;
+	}
+
+	
+	public List<FinancialData> getFinanceDataList() {
+		return financeDataList;
+	}
+
+	public void setFinanceDataList(List<FinancialData> financeDataList) {
+		this.financeDataList = financeDataList;
 	}
 
 	@Override
