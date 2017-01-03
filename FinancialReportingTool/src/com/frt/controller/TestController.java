@@ -55,7 +55,7 @@ public class TestController {
 	@Autowired
 	HttpServletRequest request;
 
-	Project project1 = new Project("IBM Portal", "IBM User Management Portal",
+	/*Project project1 = new Project("IBM Portal", "IBM User Management Portal",
 			true, "EE", "Managed T&M", true, "portal", "liferay", "consulting",
 			new Date(), "USA", "Java", "Vishal");
 
@@ -66,7 +66,7 @@ public class TestController {
 	Project project3 = new Project("Licence", "Licence", false, "NN",
 			"Licence", false, "Magento Licence", "Magento Licence", "Licence",
 			new Date(), "USA", "Licence", "Vishal");
-
+*/
 	ProjectResource projectResource1 = new ProjectResource("CAD1111111A",
 			"Juhi Soni", "Developer", "Java", "USA", "Resource",
 			"Onsite Vendor");
@@ -99,7 +99,7 @@ public class TestController {
 	SubProject subProject5 = new SubProject("IOS");
 	SubProject subProject6 = new SubProject("UX");
 
-	FinancialData financialData1 = new FinancialData("april", 2016,
+/*	FinancialData financialData1 = new FinancialData("april", 2016,
 			"Anand Shah", "Paul Anthony", "Paul Anthony", "Srinivas Tadeparti",
 			30, 10000.00, 5940.00, 4060.00, 40.60, 120, 55000.00, 26000.00,
 			29000.00, 52.73);
@@ -146,7 +146,7 @@ public class TestController {
 			0.00, 0.00, 0.00, 0.00);
 	FinancialData financialData14 = new FinancialData("may", 2016, "Jogen G",
 			"Pinkal K", "Pinkal K", "PKV Sastry", 0, 0.00, 0.00, 0.00, 0.00, 0,
-			0.00, 0.00, 0.00, 0.00);
+			0.00, 0.00, 0.00, 0.00);*/
 
 	// uncomment the code to save the data
 	/*
@@ -281,7 +281,7 @@ public class TestController {
 		return revenueOfManagementTeamPerson;
 	}
 
-	public void projectz() {
+	/*public void projectz() {
 
 		List<Project> projectList3 = new ArrayList<>();
 		projectList3.add(project3);
@@ -368,9 +368,9 @@ public class TestController {
 		financialDataService.saveFinanceData(financialData10);
 		financialDataService.saveFinanceData(financialData11);
 		financialDataService.saveFinanceData(financialData12);
-	}
+	}*/
 
-	public void projectx() {
+/*	public void projectx() {
 
 		List<Project> projectList1 = new ArrayList<>();
 		projectList1.add(project1);
@@ -432,5 +432,5 @@ public class TestController {
 		subProjectService.saveSubProject(subProject1);
 		subProjectService.saveSubProject(subProject2);
 		subProjectService.saveSubProject(subProject3);
-	}
+	}*/
 }

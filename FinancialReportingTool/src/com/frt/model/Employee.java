@@ -8,8 +8,10 @@ import javax.persistence.Enumerated;
 @Entity
 public class Employee  implements Serializable{
 	
-	public enum Role{
-		projectManager, salesHead, salesPerson, deliveryHead, projectResources
+	private static final long serialVersionUID = 1L;
+
+	enum Role{
+		Project_Manager, Sales_Head, Sales_Person, Delivery_Head, Project_Resources
 	}
 
 	private Long id;
