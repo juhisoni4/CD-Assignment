@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.frt.model.FinancialData;
+import com.frt.model.FinancialData.Month;
 import com.frt.service.FinancialDataService;
 
 import com.frt.util.Util;
@@ -18,8 +19,7 @@ import com.frt.util.Util;
 public class FinancialDataController {
 
 	@Autowired
-	FinancialDataService financialDataService;
-	
+	FinancialDataService financialDataService;	
 
 	@RequestMapping(value = "/list")	
 	public Map<String, Double> getFinanceDataByManagementTeamPerson(
@@ -48,78 +48,78 @@ public class FinancialDataController {
 		for (FinancialData data : financeDataList) {
 			
 			Double financeData = Util.get(data, typeOfFinanceData);
-			String month = data.getMonth();
+			Month month = data.getMonth();
 			
 			switch (month) {
 
-			case "january":
+			case JAN:
 				totalFinanceDataPerJanuary += financeData;
 				revenueOfManagementTeamPerson.put("january",
 						totalFinanceDataPerJanuary);
 				break;
 
-			case "february":
+			case FEB:
 
 				totalFinanceDataPerFebruary += financeData;
 				revenueOfManagementTeamPerson.put("february",
 						totalFinanceDataPerFebruary);
 				break;
 
-			case "march":
+			case MAR:
 				totalFinanceDataPerMarch += financeData;
 				revenueOfManagementTeamPerson.put("march",
 						totalFinanceDataPerMarch);
 				break;
 
-			case "april":
+			case APR:
 				totalFinanceDataPerApril += financeData;
 				revenueOfManagementTeamPerson.put("april",
 						totalFinanceDataPerApril);
 				break;
 
-			case "may":
+			case MAY:
 				totalFinanceDataPerMay += financeData;
 				revenueOfManagementTeamPerson
 						.put("may", totalFinanceDataPerMay);
 				break;
 
-			case "june":
+			case JUN:
 				totalFinanceDataPerJune += financeData;
 				revenueOfManagementTeamPerson.put("june",
 						totalFinanceDataPerJune);
 				break;
 
-			case "july":
+			case JUL:
 				totalFinanceDataPerJuly += financeData;
 				revenueOfManagementTeamPerson.put("july",
 						totalFinanceDataPerJuly);
 				break;
 
-			case "august":
+			case AUG:
 				totalFinanceDataPerAugust += financeData;
 				revenueOfManagementTeamPerson.put("august",
 						totalFinanceDataPerAugust);
 				break;
 
-			case "september":
+			case SEP:
 				totalFinanceDataPerSeptember += financeData;
 				revenueOfManagementTeamPerson.put("september",
 						totalFinanceDataPerSeptember);
 				break;
 
-			case "october":
+			case OCT:
 				totalFinanceDataPerOctober += financeData;
 				revenueOfManagementTeamPerson.put("october",
 						totalFinanceDataPerOctober);
 				break;
 
-			case "november":
+			case NOV:
 				totalFinanceDataPerNovember += financeData;
 				revenueOfManagementTeamPerson.put("november",
 						totalFinanceDataPerNovember);
 				break;
 
-			case "december":
+			case DEC:
 				totalFinanceDataPerDecember += financeData;
 				revenueOfManagementTeamPerson.put("december",
 						totalFinanceDataPerDecember);
@@ -128,5 +128,23 @@ public class FinancialDataController {
 		}
 
 		return revenueOfManagementTeamPerson;
+	}
+	
+	public void saveFinancialData(FinancialData financialData){
+		
+		financialDataService.saveFinanceData(financialData);
+	}
+	
+	public FinancialData getFinancialDataById(Long id){
+		
+		FinancialData financialData = financialDataService.getFinanceDataById(id);
+		return financialData;
+	}
+	
+	public List<FinancialData> getAllFinancialData(){
+		
+		List<FinancialData> financialDataList = new ArrayList<>();
+		financialDataList = financialDataService.getAllFinanceData();
+		return financialDataList;		
 	}
 }

@@ -1,7 +1,7 @@
 package com.frt.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Client implements Serializable{
@@ -30,10 +28,12 @@ public class Client implements Serializable{
 	private String clientJoining;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Project> projectList;
+	@JoinColumn(name="CLIENT_ID")
+	private Set<Project> projectList;
 	
 	@OneToMany
-	private List<FinancialData> financeDataList;
+	@JoinColumn(name="CLIENT_ID")
+	private Set<FinancialData> financeDataList;
 			
 	public Client() {
 		
@@ -87,20 +87,20 @@ public class Client implements Serializable{
 		this.clientJoining = clientJoining;
 	}
 
-	public List<Project> getProjectList() {
+	public Set<Project> getProjectList() {
 		return projectList;
 	}
 
-	public void setProjectList(List<Project> projectList) {
+	public void setProjectList(Set<Project> projectList) {
 		this.projectList = projectList;
 	}
 
 	
-	public List<FinancialData> getFinanceDataList() {
+	public Set<FinancialData> getFinanceDataList() {
 		return financeDataList;
 	}
 
-	public void setFinanceDataList(List<FinancialData> financeDataList) {
+	public void setFinanceDataList(Set<FinancialData> financeDataList) {
 		this.financeDataList = financeDataList;
 	}
 

@@ -4,16 +4,16 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Employee  implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	enum Role{
-		Project_Manager, Sales_Head, Sales_Person, Delivery_Head, Project_Resources
-	}
-
+	@Id
+	@GeneratedValue
 	private Long id;
 	
 	private String firstName;
@@ -21,6 +21,10 @@ public class Employee  implements Serializable{
 	private String lastName;
 	
 	private String resourceCode;
+	
+	public enum Role{
+		Project_Manager, Sales_Head, Sales_Person, Delivery_Head, Project_Resources
+	}
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
