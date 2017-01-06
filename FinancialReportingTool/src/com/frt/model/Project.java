@@ -2,19 +2,15 @@ package com.frt.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 @Entity
 public class Project implements Serializable {
@@ -51,14 +47,16 @@ public class Project implements Serializable {
 
 	private String requestedBy;
 
-	@OneToOne
+	@ManyToOne
 	private Client client;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<FinancialData> projectResourcesList;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="PROJECT_ID")
+	private Set<FinancialData> financialDataList;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<SubProject> subProjectList;
+	@JoinColumn(name="PROJECT_ID")
+	private Set<SubProject> subProjectList;
 
 	public Project() {
 
@@ -186,19 +184,19 @@ public class Project implements Serializable {
 		this.endPeriod = endPeriod;
 	}
 
-	public List<FinancialData> getProjectResourcesList() {
-		return projectResourcesList;
+	public Set<FinancialData> getProjectResourcesList() {
+		return financialDataList;
 	}
 
-	public void setProjectResourcesList(List<FinancialData> projectResourcesList) {
-		this.projectResourcesList = projectResourcesList;
+	public void setProjectResourcesList(Set<FinancialData> financialDataList) {
+		this.financialDataList = financialDataList;
 	}
 
-	public List<SubProject> getSubProjectList() {
+	public Set<SubProject> getSubProjectList() {
 		return subProjectList;
 	}
 
-	public void setSubProjectList(List<SubProject> subProjectList) {
+	public void setSubProjectList(Set<SubProject> subProjectList) {
 		this.subProjectList = subProjectList;
 	}
 

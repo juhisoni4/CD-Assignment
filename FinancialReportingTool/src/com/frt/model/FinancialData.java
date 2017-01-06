@@ -1,12 +1,12 @@
 package com.frt.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -22,7 +22,7 @@ public class FinancialData implements Serializable {
 	
 	private String roleOfResource;
 	
-	private String reuestedBy;
+	private String requestedBy;
 	
 	private String resourceSkill;
 	
@@ -30,11 +30,15 @@ public class FinancialData implements Serializable {
 	
 	private String resourceExpense;
 	
-	private String month;
+	public enum Month{
+		JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC
+	}
+	
+	private Month month;
 
-	private Integer year;	
+	private long year;	
 
-	private Integer hrs_days;
+	private long hrs_days;
 
 	private Double actualRevenue;
 
@@ -44,27 +48,27 @@ public class FinancialData implements Serializable {
 
 	private Double actualMarginPercentage;
 
-	private Integer hrs_daysYear;
+	//private Integer hrs_daysYear;
 
-	private Double actualRevenueYear;
+	//private Double actualRevenueYear;
 
-	private Double actualCostYear;
+	//private Double actualCostYear;
 
-	private Double actualProjectMarginYear;
+	//private Double actualProjectMarginYear;
 
-	private Double actualMarginPercentageYear;
+	//private Double actualMarginPercentageYear;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Project project;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Client client;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Employee projectResource;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private Employee projectManaget;
+	private Employee projectManager;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Employee salesHead;
@@ -104,11 +108,11 @@ public class FinancialData implements Serializable {
 	}
 
 	public String getReuestedBy() {
-		return reuestedBy;
+		return requestedBy;
 	}
 
-	public void setReuestedBy(String reuestedBy) {
-		this.reuestedBy = reuestedBy;
+	public void setReuestedBy(String requestedBy) {
+		this.requestedBy = requestedBy;
 	}
 
 	public String getResourceSkill() {
@@ -135,27 +139,27 @@ public class FinancialData implements Serializable {
 		this.resourceExpense = resourceExpense;
 	}
 
-	public String getMonth() {
+	public Month getMonth() {
 		return month;
 	}
 
-	public void setMonth(String month) {
+	public void setMonth(Month month) {
 		this.month = month;
 	}
 
-	public Integer getYear() {
+	public long getYear() {
 		return year;
 	}
 
-	public void setYear(Integer year) {
+	public void setYear(long year) {
 		this.year = year;
 	}
 
-	public Integer getHrs_days() {
+	public long getHrs_days() {
 		return hrs_days;
 	}
 
-	public void setHrs_days(Integer hrs_days) {
+	public void setHrs_days(long hrs_days) {
 		this.hrs_days = hrs_days;
 	}
 
@@ -191,7 +195,7 @@ public class FinancialData implements Serializable {
 		this.actualMarginPercentage = actualMarginPercentage;
 	}
 
-	public Integer getHrs_daysYear() {
+	/*public Integer getHrs_daysYear() {
 		return hrs_daysYear;
 	}
 
@@ -229,7 +233,7 @@ public class FinancialData implements Serializable {
 
 	public void setActualMarginPercentageYear(Double actualMarginPercentageYear) {
 		this.actualMarginPercentageYear = actualMarginPercentageYear;
-	}
+	}*/
 
 	public Project getProject() {
 		return project;
@@ -255,12 +259,12 @@ public class FinancialData implements Serializable {
 		this.projectResource = projectResource;
 	}
 
-	public Employee getProjectManaget() {
-		return projectManaget;
+	public Employee getProjectManager() {
+		return projectManager;
 	}
 
-	public void setProjectManaget(Employee projectManaget) {
-		this.projectManaget = projectManaget;
+	public void setProjectManager(Employee projectManager) {
+		this.projectManager = projectManager;
 	}
 
 	public Employee getSalesHead() {
