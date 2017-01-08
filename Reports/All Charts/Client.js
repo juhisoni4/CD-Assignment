@@ -6,9 +6,9 @@
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
-		var jsonData;
+		var jsonData1;
 		$.getJSON("data1.json",function(data){
-		 jsonData = data;
+		 jsonData1 = data;
 		 });
 	
 	function drawChart() {		
@@ -17,20 +17,20 @@
 		data1.addColumn('string', 'Month');
 		data1.addColumn('number', 'Revenue');	
 		
-		console.log(jsonData);
+		console.log(jsonData1);
 		//for (var i = 0; i < jsonData.length; i++){        
 		//data1.addRow([jsonData[i].Month,jsonData[i].Revenue]);		
 		//data1.setCell(i,0,jsonData[i].Month);
 		//data1.setCell(i,1,jsonData[i].Revenue);
 		//} 	
 		
-		for (var i = 0; i < jsonData.length; i++){
-		data1.addRow(jsonData[i]);
-		var length = jsonData[i];
+		for (var i = 0; i < jsonData1.length; i++){
+		data1.addRow(jsonData1[i]);
+		var length = jsonData1[i];
 		console.log(length);
 		for(var j = 0;j < length;j++){
-		data1.setCell(i,0,jsonData[j]);
-		data1.setCell(i,1,jsonData[length-1]);
+		data1.setCell(i,0,jsonData1[j]);
+		data1.setCell(i,1,jsonData1[length-1]);
 		}
 		}
       
