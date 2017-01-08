@@ -11,36 +11,37 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Client implements Serializable{
-	
+public class Client implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String clientName;
-	
+
 	private String domain;
-	
+
 	private String region;
-	
+
 	private String clientJoining;
-	
+
+	private boolean display;
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="CLIENT_ID")
+	@JoinColumn(name = "CLIENT_ID")
 	private Set<Project> projectList;
-	
+
 	@OneToMany
-	@JoinColumn(name="CLIENT_ID")
+	@JoinColumn(name = "CLIENT_ID")
 	private Set<FinancialData> financeDataList;
-			
+
 	public Client() {
-		
+
 	}
 
-	public Client(String clientName, String domain, String region,
-			String clientJoining) {
+	public Client(String clientName, String domain, String region, String clientJoining) {
 		this.clientName = clientName;
 		this.domain = domain;
 		this.region = region;
@@ -87,6 +88,14 @@ public class Client implements Serializable{
 		this.clientJoining = clientJoining;
 	}
 
+	public boolean isDisplay() {
+		return display;
+	}
+
+	public void setDisplay(boolean display) {
+		this.display = display;
+	}
+
 	public Set<Project> getProjectList() {
 		return projectList;
 	}
@@ -95,7 +104,6 @@ public class Client implements Serializable{
 		this.projectList = projectList;
 	}
 
-	
 	public Set<FinancialData> getFinanceDataList() {
 		return financeDataList;
 	}
@@ -106,10 +114,8 @@ public class Client implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", clientName=" + clientName + ", domain="
-				+ domain + ", region=" + region + ", clientJoining="
-				+ clientJoining + "]";
+		return "Client [id=" + id + ", clientName=" + clientName + ", domain=" + domain + ", region=" + region
+				+ ", clientJoining=" + clientJoining + "]";
 	}
-	
-		
+
 }

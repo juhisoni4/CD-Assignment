@@ -45,8 +45,6 @@ public class Project implements Serializable {
 
 	private String groupSkill;
 
-	private String requestedBy;
-
 	@ManyToOne
 	private Client client;
 
@@ -64,7 +62,7 @@ public class Project implements Serializable {
 
 	public Project(String projectNamePerQB, String projectNamePerQuest, boolean isProjectNew, String natureOfDeal,
 			String sourceOfBusiness, String type, String technology, String subTechnology, String stream,
-			Date endPeriod, String qb, String groupSkill, String requestedBy) {
+			Date endPeriod, String qb, String groupSkill) {
 		this.projectNamePerQB = projectNamePerQB;
 		this.projectNamePerQuest = projectNamePerQuest;
 		this.isProjectNew = isProjectNew;
@@ -76,8 +74,7 @@ public class Project implements Serializable {
 		this.stream = stream;
 		this.endPeriod = endPeriod;
 		this.qb = qb;
-		this.groupSkill = groupSkill;
-		this.requestedBy = requestedBy;
+		this.groupSkill = groupSkill;		
 	}
 
 	public Long getId() {
@@ -120,6 +117,14 @@ public class Project implements Serializable {
 		this.natureOfDeal = natureOfDeal;
 	}
 
+	public String getSourceOfBusiness() {
+		return sourceOfBusiness;
+	}
+
+	public void setSourceOfBusiness(String sourceOfBusiness) {
+		this.sourceOfBusiness = sourceOfBusiness;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -152,6 +157,14 @@ public class Project implements Serializable {
 		this.stream = stream;
 	}
 
+	public Date getEndPeriod() {
+		return endPeriod;
+	}
+
+	public void setEndPeriod(Date endPeriod) {
+		this.endPeriod = endPeriod;
+	}
+
 	public String getQb() {
 		return qb;
 	}
@@ -168,27 +181,19 @@ public class Project implements Serializable {
 		this.groupSkill = groupSkill;
 	}
 
-	public String getRequestedBy() {
-		return requestedBy;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setRequestedBy(String requestedBy) {
-		this.requestedBy = requestedBy;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
-	public Date getEndPeriod() {
-		return endPeriod;
-	}
-
-	public void setEndPeriod(Date endPeriod) {
-		this.endPeriod = endPeriod;
-	}
-
-	public Set<FinancialData> getProjectResourcesList() {
+	public Set<FinancialData> getFinancialDataList() {
 		return financialDataList;
 	}
 
-	public void setProjectResourcesList(Set<FinancialData> financialDataList) {
+	public void setFinancialDataList(Set<FinancialData> financialDataList) {
 		this.financialDataList = financialDataList;
 	}
 
@@ -200,19 +205,4 @@ public class Project implements Serializable {
 		this.subProjectList = subProjectList;
 	}
 
-	public String getSourceOfBusiness() {
-		return sourceOfBusiness;
-	}
-
-	public void setSourceOfBusiness(String sourceOfBusiness) {
-		this.sourceOfBusiness = sourceOfBusiness;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
 }

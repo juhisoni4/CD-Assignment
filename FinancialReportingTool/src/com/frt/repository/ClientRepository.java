@@ -11,4 +11,6 @@ public interface ClientRepository {
 	public Client getClientById(Long id);
 	
 	public List<Client> getAllClient();
+
+	List<Client> search(Client client);
 }

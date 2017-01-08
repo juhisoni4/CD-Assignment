@@ -40,13 +40,13 @@ public class FinancialData implements Serializable {
 
 	private long hrs_days;
 
-	private Double actualRevenue;
+	private double actualRevenue;
 
-	private Double actualCost;
+	private double actualCost;
 
-	private Double actualProjectMargin;
+	private double actualProjectMargin;
 
-	private Double actualMarginPercentage;
+	private double actualMarginPercentage;
 
 	//private Integer hrs_daysYear;
 
@@ -107,11 +107,11 @@ public class FinancialData implements Serializable {
 		this.roleOfResource = roleOfResource;
 	}
 
-	public String getReuestedBy() {
+	public String getRequestedBy() {
 		return requestedBy;
 	}
 
-	public void setReuestedBy(String requestedBy) {
+	public void setRequestedBy(String requestedBy) {
 		this.requestedBy = requestedBy;
 	}
 
@@ -163,35 +163,35 @@ public class FinancialData implements Serializable {
 		this.hrs_days = hrs_days;
 	}
 
-	public Double getActualRevenue() {
+	public double getActualRevenue() {
 		return actualRevenue;
 	}
 
-	public void setActualRevenue(Double actualRevenue) {
+	public void setActualRevenue(double actualRevenue) {
 		this.actualRevenue = actualRevenue;
 	}
 
-	public Double getActualCost() {
+	public double getActualCost() {
 		return actualCost;
 	}
 
-	public void setActualCost(Double actualCost) {
+	public void setActualCost(double actualCost) {
 		this.actualCost = actualCost;
 	}
 
-	public Double getActualProjectMargin() {
+	public double getActualProjectMargin() {
 		return actualProjectMargin;
 	}
 
-	public void setActualProjectMargin(Double actualProjectMargin) {
+	public void setActualProjectMargin(double actualProjectMargin) {
 		this.actualProjectMargin = actualProjectMargin;
 	}
 
-	public Double getActualMarginPercentage() {
+	public double getActualMarginPercentage() {
 		return actualMarginPercentage;
 	}
 
-	public void setActualMarginPercentage(Double actualMarginPercentage) {
+	public void setActualMarginPercentage(double actualMarginPercentage) {
 		this.actualMarginPercentage = actualMarginPercentage;
 	}
 
@@ -286,5 +286,11 @@ public class FinancialData implements Serializable {
 	public Employee getDeliveryHead() {
 		return deliveryHead;
 	}
+
+	public void setDeliveryHead(Employee deliveryHead) {
+		this.deliveryHead = deliveryHead;
+	}
+	
+	
 	
 }

@@ -23,7 +23,7 @@ public class Employee  implements Serializable{
 	private String resourceCode;
 	
 	public enum Role{
-		Project_Manager, Sales_Head, Sales_Person, Delivery_Head, Project_Resources
+		Project_Manager, Sales_Head, Sales_Person, Delivery_Head, Project_Resource
 	}
 	
 	@Enumerated(EnumType.STRING)
