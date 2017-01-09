@@ -76,11 +76,11 @@ public class TestController {
 		project.setTechnology("Portals");
 		project.setQb("AMER");
 
-		SubProject subProject = new SubProject();
-		subProject.setSubProjectName("Watson");
+		SubProject subProject1 = new SubProject();
+		subProject1.setSubProjectName("Liferay Portal");
 
 		Set<SubProject> subProjectList = new LinkedHashSet<SubProject>();
-		subProjectList.add(subProject);
+		subProjectList.add(subProject1);
 
 		project.setSubProjectList(subProjectList);
 
