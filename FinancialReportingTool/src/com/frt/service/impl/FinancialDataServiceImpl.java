@@ -50,4 +50,10 @@ public class FinancialDataServiceImpl implements FinancialDataService {
 		return totalRevenue;
 	}
 
+	@Override
+	public List<FinancialData> search(FinancialData FinancialData) {
+		
+		return financialDataRepository.search(FinancialData);
+	}
+
 }

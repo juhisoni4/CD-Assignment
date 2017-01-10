@@ -11,4 +11,6 @@ public interface SubProjectService {
 	public SubProject getSubProjectById(Long id);
 
 	public List<SubProject> getAllSubProject();
+	
+	public List<SubProject> search(SubProject subProject);
 }

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.frt.model.Project;
 import com.frt.model.Project;
 import com.frt.repository.ProjectRepository;
 
@@ -15,27 +17,40 @@ public class ProjectRepositoryImpl implements ProjectRepository {
 
 	@Autowired
 	public SessionFactory factory;
-	
+
 	@Override
 	public Project getProjectById(Long id) {
-		
-		Project project = (Project) factory.getCurrentSession().get(Project.class, id);
+
+		Project project = (Project) factory.getCurrentSession().get(
+				Project.class, id);
 		return project;
 	}
 
 	@Override
 	public List<Project> getAllProject() {
-		
+
 		List<Project> projectList = new ArrayList<>();
-		projectList = factory.getCurrentSession().createQuery("from Project").list();
+		projectList = factory.getCurrentSession().createQuery("from Project")
+				.list();
 		return projectList;
 	}
 
 	@Override
 	public void saveProject(Project project) {
-		
+
 		factory.getCurrentSession().saveOrUpdate(project);
-		
+
+	}
+
+	public List<Project> search(Project Project) {
+
+		Example ProjectExample = Example.create(Project);
+		List<Project> ProjectList = factory.getCurrentSession()
+				.createCriteria(Project.class).add(ProjectExample)
+				.list();
+
+		return ProjectList;
+
 	}
 
 }

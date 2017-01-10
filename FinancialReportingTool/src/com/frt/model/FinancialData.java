@@ -290,7 +290,18 @@ public class FinancialData implements Serializable {
 	public void setDeliveryHead(Employee deliveryHead) {
 		this.deliveryHead = deliveryHead;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "FinancialData [id=" + id + ", isOnSite=" + isOnSite
+				+ ", roleOfResource=" + roleOfResource + ", requestedBy="
+				+ requestedBy + ", resourceSkill=" + resourceSkill
+				+ ", locationOfResource=" + locationOfResource
+				+ ", resourceExpense=" + resourceExpense + ", month=" + month
+				+ ", year=" + year + ", hrs_days=" + hrs_days
+				+ ", actualRevenue=" + actualRevenue + ", actualCost="
+				+ actualCost + ", actualProjectMargin=" + actualProjectMargin
+				+ ", actualMarginPercentage=" + actualMarginPercentage + "]";
+	}
 	
 }

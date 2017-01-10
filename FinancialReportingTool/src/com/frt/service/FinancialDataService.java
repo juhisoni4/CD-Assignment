@@ -14,4 +14,6 @@ public interface FinancialDataService {
 	public List<FinancialData> getAllFinanceData();
 	
 	public List<FinancialData> getRevenueByProjectManager(String month1, String month2, Integer year,String managementTeam, String managementTeamPersonName);
+	
+	public List<FinancialData> search(FinancialData FinancialData);
 }

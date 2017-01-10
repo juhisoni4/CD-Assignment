@@ -13,5 +13,7 @@ public interface FinancialDataRepository {
 	
 	public List<FinancialData> getAlladdFinanceData();
 	
+	public List<FinancialData> search(FinancialData FinancialData);
+	
 	public List<FinancialData> getRevenueByProjectManager(String month1, String month2, Integer year,String managementTeam, String managementTeamPersonName);
 }

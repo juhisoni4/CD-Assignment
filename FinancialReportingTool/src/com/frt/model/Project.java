@@ -205,4 +205,16 @@ public class Project implements Serializable {
 		this.subProjectList = subProjectList;
 	}
 
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", projectNamePerQB=" + projectNamePerQB
+				+ ", projectNamePerQuest=" + projectNamePerQuest
+				+ ", isProjectNew=" + isProjectNew + ", natureOfDeal="
+				+ natureOfDeal + ", sourceOfBusiness=" + sourceOfBusiness
+				+ ", type=" + type + ", technology=" + technology
+				+ ", subTechnology=" + subTechnology + ", stream=" + stream
+				+ ", endPeriod=" + endPeriod + ", qb=" + qb + ", groupSkill="
+				+ groupSkill + "]";
+	}
+
 }

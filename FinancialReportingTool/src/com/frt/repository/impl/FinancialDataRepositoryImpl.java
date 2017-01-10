@@ -9,9 +9,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.frt.model.FinancialData;
 import com.frt.model.FinancialData;
 import com.frt.repository.FinancialDataRepository;
 
@@ -21,8 +24,9 @@ public class FinancialDataRepositoryImpl implements FinancialDataRepository {
 	@Autowired
 	SessionFactory factory;
 
-	/*@Autowired
-	FinancialData financialData;*/
+	/*
+	 * @Autowired FinancialData financialData;
+	 */
 
 	@Override
 	public void saveFinanceData(FinancialData financialData) {
@@ -64,5 +68,15 @@ public class FinancialDataRepositoryImpl implements FinancialDataRepository {
 
 		return financeDatalist;
 	}
-	
+
+	public List<FinancialData> search(FinancialData FinancialData) {
+
+		Example FinancialDataExample = Example.create(FinancialData);
+		List<FinancialData> FinancialDataList = factory.getCurrentSession()
+				.createCriteria(FinancialData.class).add(FinancialDataExample).list();
+
+		return FinancialDataList;
+
+	}
+
 }

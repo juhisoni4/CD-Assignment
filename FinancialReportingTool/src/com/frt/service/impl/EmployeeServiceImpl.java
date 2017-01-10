@@ -39,6 +39,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeList = employeeRepository.getAllEmployee();
 		return employeeList;
 		
+	}
+
+	@Override
+	public List<Employee> search(Employee employee) {
+		
+		return employeeRepository.search(employee);
+	}
+
+	@Override
+	public List<Employee> searchWithoutResourceCode(Employee employee) {
+		
+		return employeeRepository.searchWithoutResourceCode(employee);
 	}	
 
 }

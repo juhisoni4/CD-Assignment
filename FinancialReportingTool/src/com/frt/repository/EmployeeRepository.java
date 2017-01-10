@@ -11,5 +11,9 @@ public interface EmployeeRepository {
 	public Employee getEmployeetById(Long id);
 
 	public List<Employee> getAllEmployee();
+	
+	public List<Employee> search(Employee employee);
+	
+	public List<Employee> searchWithoutResourceCode(Employee employee);
 
 }

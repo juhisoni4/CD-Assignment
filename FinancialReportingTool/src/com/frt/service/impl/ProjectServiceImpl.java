@@ -42,4 +42,10 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectList;
 	}
 
+	@Override
+	public List<Project> search(Project Project) {
+		
+		return projectRepository.search(Project);
+	}
+
 }

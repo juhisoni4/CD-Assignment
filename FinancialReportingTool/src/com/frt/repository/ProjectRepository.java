@@ -10,4 +10,6 @@ public interface ProjectRepository {
 	public Project getProjectById(Long id);
 
 	public List<Project> getAllProject();
+	
+	public List<Project> search(Project Project);
 }

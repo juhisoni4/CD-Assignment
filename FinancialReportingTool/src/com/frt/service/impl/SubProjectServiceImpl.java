@@ -39,4 +39,10 @@ public class SubProjectServiceImpl implements SubProjectService{
 		return subProjectList;
 	}
 
+	@Override
+	public List<SubProject> search(SubProject subProject) {
+		
+		return subProjectRepository.search(subProject);
+	}
+
 }
