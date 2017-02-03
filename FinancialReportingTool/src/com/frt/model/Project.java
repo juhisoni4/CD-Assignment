@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 public class Project implements Serializable {
@@ -18,14 +20,14 @@ public class Project implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
 	private String projectNamePerQB;
 
 	private String projectNamePerQuest;
 
-	private boolean isProjectNew;
+	private Boolean isProjectNew;
 
 	private String natureOfDeal;
 
@@ -39,30 +41,32 @@ public class Project implements Serializable {
 
 	private String stream;
 
-	private Date endPeriod;
+	private String endPeriod;
 
 	private String qb;
 
 	private String groupSkill;
 
 	@ManyToOne
+	@Cascade({CascadeType.ALL})
 	private Client client;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="PROJECT_ID")
+	@OneToMany(mappedBy="project")	
+	//@JoinColumn(name="PROJECT_ID")
 	private Set<FinancialData> financialDataList;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="PROJECT_ID")
+	@OneToMany(mappedBy="project")
+	@Cascade({CascadeType.ALL})
+	//@JoinColumn(name="PROJECT_ID")
 	private Set<SubProject> subProjectList;
 
 	public Project() {
 
 	}
 
-	public Project(String projectNamePerQB, String projectNamePerQuest, boolean isProjectNew, String natureOfDeal,
+	public Project(String projectNamePerQB, String projectNamePerQuest, Boolean isProjectNew, String natureOfDeal,
 			String sourceOfBusiness, String type, String technology, String subTechnology, String stream,
-			Date endPeriod, String qb, String groupSkill) {
+			String endPeriod, String qb, String groupSkill) {
 		this.projectNamePerQB = projectNamePerQB;
 		this.projectNamePerQuest = projectNamePerQuest;
 		this.isProjectNew = isProjectNew;
@@ -101,11 +105,11 @@ public class Project implements Serializable {
 		this.projectNamePerQuest = projectNamePerQuest;
 	}
 
-	public boolean isProjectNew() {
+	public Boolean isProjectNew() {
 		return isProjectNew;
 	}
 
-	public void setProjectNew(boolean isProjectNew) {
+	public void setProjectNew(Boolean isProjectNew) {
 		this.isProjectNew = isProjectNew;
 	}
 
@@ -157,11 +161,11 @@ public class Project implements Serializable {
 		this.stream = stream;
 	}
 
-	public Date getEndPeriod() {
+	public String getEndPeriod() {
 		return endPeriod;
 	}
 
-	public void setEndPeriod(Date endPeriod) {
+	public void setEndPeriod(String endPeriod) {
 		this.endPeriod = endPeriod;
 	}
 

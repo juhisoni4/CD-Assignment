@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.frt.model.Client;
+import com.frt.model.FinancialData;
+import com.frt.model.FinancialData.Month;
 import com.frt.repository.ClientRepository;
 import com.frt.service.ClientService;
 
@@ -43,6 +45,13 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public List<Client> search(Client client) {
 		return clientRepository.search(client);
+	}
+
+	@Override
+	public List<FinancialData> getRevenueByClientName(Client client,
+			Month month1, Month month2, String typeOfData) {
+		
+		return clientRepository.getRevenueByClientName(client, month1, month2, typeOfData);
 	}
 
 }

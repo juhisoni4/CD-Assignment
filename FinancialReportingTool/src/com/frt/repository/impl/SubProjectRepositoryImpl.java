@@ -21,7 +21,7 @@ public class SubProjectRepositoryImpl implements SubProjectRepository {
 	@Override
 	public void saveSubProject(SubProject subProject) {
 
-		factory.getCurrentSession().saveOrUpdate(subProject);
+		factory.getCurrentSession().save(subProject);
 	}
 
 	@Override

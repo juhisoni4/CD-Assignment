@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.frt.model.Client;
+import com.frt.model.FinancialData;
+import com.frt.model.FinancialData.Month;
 import com.frt.repository.ClientRepository;
+import com.frt.util.Util;
 
 @Repository
 public class ClientRepositoryImpl implements ClientRepository {
@@ -24,7 +27,6 @@ public class ClientRepositoryImpl implements ClientRepository {
 	public void saveClient(Client client) {
 
 		factory.getCurrentSession().saveOrUpdate(client);
-
 	}
 
 	@Override
@@ -43,8 +45,32 @@ public class ClientRepositoryImpl implements ClientRepository {
 				.list();
 		return clientList;
 	}
+	
+	public List<FinancialData> getRevenueByClientName(Client client, Month month1, Month month2,String typeOfData){		
+		
+		long id = client.getId();	
+		Criteria criteria = factory.getCurrentSession().createCriteria(FinancialData.class);
+		criteria.add(Restrictions.eq("client.id", id));
+		criteria.add(Restrictions.ge("month", month1)); 
+		criteria.add(Restrictions.lt("month", month2));
+		List<FinancialData> financialDataList = criteria.list();
+		System.out.println(financialDataList);
+		return financialDataList;		
+	}
+
 
 	@Override
+	public List<Client> search(Client client) {
+
+		client.setDisplay(true);
+		Example clientExample = Example.create(client);
+		List<Client> clientList = factory.getCurrentSession()
+				.createCriteria(Client.class).add(clientExample).list();
+
+		return clientList;
+
+	}
+
 	/*
 	 * public List<Client> search(Client client) {
 	 * 
@@ -92,15 +118,5 @@ public class ClientRepositoryImpl implements ClientRepository {
 	 * 
 	 * }
 	 */
-	public List<Client> search(Client client) {
-
-		client.setDisplay(true);
-		Example clientExample = Example.create(client);
-		List<Client> clientList = factory.getCurrentSession()
-				.createCriteria(Client.class).add(clientExample).list();
-
-		return clientList;
-
-	}
-
+	
 }

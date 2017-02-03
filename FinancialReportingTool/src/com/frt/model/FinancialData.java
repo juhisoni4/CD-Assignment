@@ -1,10 +1,13 @@
 package com.frt.model;
 
 import java.io.Serializable;
-
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -15,10 +18,10 @@ public class FinancialData implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	private boolean isOnSite;
+	private Boolean isOnSite;
 	
 	private String roleOfResource;
 	
@@ -31,9 +34,9 @@ public class FinancialData implements Serializable {
 	private String resourceExpense;
 	
 	public enum Month{
-		JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC
-	}
+		APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC,JAN, FEB, MAR	}	
 	
+	@Enumerated(EnumType.ORDINAL)
 	private Month month;
 
 	private long year;	
@@ -58,7 +61,7 @@ public class FinancialData implements Serializable {
 
 	//private Double actualMarginPercentageYear;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)	
 	private Project project;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -91,11 +94,11 @@ public class FinancialData implements Serializable {
 		this.id = id;
 	}
 
-	public boolean isOnSite() {
+	public Boolean isOnSite() {
 		return isOnSite;
 	}
 
-	public void setOnSite(boolean isOnSite) {
+	public void setOnSite(Boolean isOnSite) {
 		this.isOnSite = isOnSite;
 	}
 
@@ -145,6 +148,14 @@ public class FinancialData implements Serializable {
 
 	public void setMonth(Month month) {
 		this.month = month;
+	}
+	
+	private String getMonthName(){
+		return month.name();
+	}
+	
+	private void setMonthName(String monthName){
+		month = month.valueOf(monthName);
 	}
 
 	public long getYear() {

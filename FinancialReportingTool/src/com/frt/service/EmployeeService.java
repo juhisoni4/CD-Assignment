@@ -14,6 +14,6 @@ public interface EmployeeService {
 	
 	public List<Employee> search(Employee employee);
 	
-	public List<Employee> searchWithoutResourceCode(Employee employee);
+	//public List<Employee> searchWithoutResourceCode(Employee employee);
 
 }

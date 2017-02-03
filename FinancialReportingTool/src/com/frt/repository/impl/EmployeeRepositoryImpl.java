@@ -55,7 +55,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 	}
 
-	public List<Employee> searchWithoutResourceCode(Employee employee) {
+/*	public List<Employee> searchWithoutResourceCode(Employee employee) {
 
 		Example EmployeeExample = Example.create(employee).excludeProperty("resourceCode");
 		List<Employee> EmployeeList = factory.getCurrentSession()
@@ -63,6 +63,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 		return EmployeeList;
 
-	}
+	}*/
 
 }

@@ -1,34 +1,24 @@
 package com.frt.controller;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.frt.model.Client;
-import com.frt.model.SubProject;
 
 public class App {
 
-	static int j;
-
-	static void methodA(int i) {
-		boolean b;
-		do {
-			b = i < 10 | methodB(4); /* Line 9 *///b=true|true
-			b = i < 10 || methodB(8); /* Line 10 */
-		} while (!b);
-	}
-
-	static boolean methodB(int i) {
-		j += i;
-		return true;
-	}
-
+	
 	public static void main(String[] args) {
+		int x= 0;
+        int y= 0;
+        for (int z = 0; z < 5; z++) 
+        {
+            if (( ++x > 2 ) && (++y > 2)) 
+            {
+                x++;
+               
+            }
+        }
+        System.out.println(x + " " + y);
+    }
 
-		methodA(0);
-		System.out.println("j = " + j);
+		
 		/*
 		 * List<String> list = new ArrayList<>(); list.add("Juhi");
 		 * list.add("Nehal"); list.add("Vishal"); list.add("Juhi"); for(String
@@ -289,4 +279,4 @@ public class App {
 	 * array[j] = temp; } } } }
 	 */
 
-}
+

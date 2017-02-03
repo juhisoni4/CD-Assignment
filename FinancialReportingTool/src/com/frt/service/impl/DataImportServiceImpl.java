@@ -1,21 +1,13 @@
-package com.frt.controller;
+package com.frt.service.impl;
 
-import java.io.BufferedReader;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.frt.model.Client;
 import com.frt.model.Employee;
@@ -25,20 +17,14 @@ import com.frt.model.FinancialData.Month;
 import com.frt.model.Project;
 import com.frt.model.SubProject;
 import com.frt.service.ClientService;
+import com.frt.service.DataImportService;
 import com.frt.service.EmployeeService;
 import com.frt.service.FinancialDataService;
 import com.frt.service.ProjectService;
 import com.frt.service.SubProjectService;
 
-@RestController
-//@RequestMapping(value = "/test")
-public class TestController {
-
-	@Autowired
-	HttpServletResponse response;
-
-	@Autowired
-	HttpServletRequest request;
+@Service
+public class DataImportServiceImpl implements DataImportService {
 
 	@Autowired
 	ClientService clientService;
@@ -47,39 +33,19 @@ public class TestController {
 	ProjectService projectService;
 
 	@Autowired
-	FinancialDataService financialDataService;
+	SubProjectService subProjectService;
 
 	@Autowired
-	SubProjectService subProjectService;
+	FinancialDataService financialDataService;
 
 	@Autowired
 	EmployeeService employeeService;
 
-	//@RequestMapping(value = "/list")
-	public void test() {
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void saveXlsFileData(List<List<String>> list){
 
-		System.out.println("Inside test controller...");
+		for (List<String> row : list) {
 
-		String fileName = "C:/test/Data1.csv";
-		
-		List<List<String>> mainList = new ArrayList<List<String>>();
-
-		try {
-			File fl = new File(fileName);
-			BufferedReader br = new BufferedReader(new FileReader(fl));
-			String str;
-
-			while ((str = br.readLine()) != null) {
-				String[] stringsArray = str.split(",");
-				mainList.add(Arrays.asList(stringsArray));
-			}
-			br.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		for (List<String> row : mainList) {		
-					
 			Client client = new Client();
 
 			client.setClientName(row.get(2));
@@ -87,23 +53,23 @@ public class TestController {
 			List<Client> searchClientList = clientService.search(client);
 
 			if (searchClientList != null && searchClientList.size() > 0) {
-				client = searchClientList.get(0);				
+				client = searchClientList.get(0);
 			} else {
 				client.setRegion(row.get(1));
 				client.setClientJoining(row.get(9));
 				client.setDomain(row.get(11));
 				client.setDisplay(true);
-			}
+			}			
 
 			Project project = new Project();
 			project.setProjectNamePerQB(row.get(4));
-			project.setProjectNamePerQuest(row.get(3));	
-			
+			project.setProjectNamePerQuest(row.get(3));
+
 			List<Project> searchProjectList = projectService.search(project);
 
 			if (searchProjectList != null && searchProjectList.size() > 0) {
-				project = searchProjectList.get(0);					
-			} else {
+				project = searchProjectList.get(0);
+			} else {				
 				project.setProjectNew(row.get(10).trim().toLowerCase()
 						.equalsIgnoreCase("new"));
 				project.setSourceOfBusiness(row.get(8));
@@ -111,9 +77,10 @@ public class TestController {
 				project.setType(row.get(16));
 				project.setGroupSkill(row.get(20));
 				project.setStream(row.get(25));
-				project.setSubTechnology(row.get(26));
-				project.setTechnology(row.get(27));
-				project.setQb(row.get(0));				
+				project.setSubTechnology(row.get(27));
+				project.setTechnology(row.get(28));
+				project.setEndPeriod(row.get(26));
+				project.setQb(row.get(0));
 			}
 
 			SubProject subProject = new SubProject();
@@ -125,14 +92,15 @@ public class TestController {
 			if (searchSubProjectList != null && searchSubProjectList.size() > 0) {
 				subProject = searchSubProjectList.get(0);
 			}
-			
-			Set<SubProject> subProjectList = new LinkedHashSet<SubProject>();	
-			
-			subProjectList.add(subProject);				
+
 			subProject.setProject(project);
+
+			Set<SubProject> subProjectList = new LinkedHashSet<SubProject>();
+
+			subProjectList.add(subProject);
 			project.setClient(client);
 			project.setSubProjectList(subProjectList);
-			
+
 			Employee salesHead = new Employee();
 			salesHead.setName(row.get(6));
 			salesHead.setRole(Role.Sales_Head);
@@ -188,9 +156,11 @@ public class TestController {
 			if (searchEmployeeList != null && searchEmployeeList.size() > 0) {
 				resource = searchEmployeeList.get(0);
 				searchEmployeeList = null;
-			}		
+			}
+			
+			long year = Long.parseLong(row.get(29));	
 
-			for (int j = 29, i = 0; j <= 88; ++j, i++) {
+			for (int j = 30, i = 0; j <= 89; ++j, i++) {
 
 				FinancialData financialData = new FinancialData();
 				financialData.setOnSite(row.get(16).trim().toLowerCase()
@@ -199,8 +169,7 @@ public class TestController {
 				financialData.setRequestedBy(row.get(19));
 				financialData.setResourceSkill(row.get(21));
 				financialData.setLocationOfResource(row.get(23));
-				financialData.setResourceExpense(row.get(24));
-				financialData.setYear(Long.parseLong(row.get(28)));
+				financialData.setResourceExpense(row.get(24));		
 
 				if (row.get(j).isEmpty()) {
 					j = j + 5;
@@ -208,20 +177,38 @@ public class TestController {
 				}
 
 				financialData.setMonth(Month.values()[i]);
-
-				financialData.setHrs_days(Long.parseLong(row.get(j)));
-
-				financialData
-						.setActualRevenue(Double.parseDouble(row.get(++j)));
-
-				financialData.setActualCost(Double.parseDouble(row.get(++j)));
-
-				financialData.setActualProjectMargin(Double.parseDouble(row
-						.get(++j)));
-
-				financialData.setActualMarginPercentage(Double.parseDouble(row
-						.get(++j)));				
 				
+				if(Month.values()[i].equals(Month.JAN)){
+					year++;
+				}
+
+				if (!row.get(28).isEmpty()) {					
+					financialData.setYear(year);
+				}
+				
+				if (!row.get(j).isEmpty()) {
+					financialData.setHrs_days(Long.parseLong(row.get(j)));
+				}
+
+				if(!row.get(++j).isEmpty()){
+					financialData
+					.setActualRevenue(Double.parseDouble(row.get(j)));
+				}
+				
+				if(!row.get(++j).isEmpty()){
+					financialData.setActualCost(Double.parseDouble(row.get(j)));
+				}
+				
+				if(!row.get(++j).isEmpty()){
+					financialData.setActualProjectMargin(Double.parseDouble(row
+							.get(j)));
+				}
+				
+				if(!row.get(++j).isEmpty()){
+					financialData.setActualMarginPercentage(Double.parseDouble(row
+							.get(j)));
+				}			
+
 				financialData.setProjectResource(resource);
 
 				financialData.setSalesHead(salesHead);
@@ -232,9 +219,9 @@ public class TestController {
 
 				financialData.setDeliveryHead(deliveryHead);
 
-				financialData.setProject(project);
-
 				financialData.setClient(client);
+
+				financialData.setProject(project);
 
 				financialDataService.saveFinanceData(financialData);
 			}
