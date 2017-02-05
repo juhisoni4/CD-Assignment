@@ -11,7 +11,7 @@
 				
 				var data2 = [];
 				for(var i in data){					
-					 data2.push([data[i].clientName, data[i].revenue, data[i].cost, data[i].actualProjectMargin,data[i].actualProjectMarginPercentage]);
+					 data2.push([data[i].clientName, data[i].cost, data[i].actualProjectMargin, data[i].actualProjectMarginPercentage ,data[i].revenue]);
 				}
 				
 				console.log(data2);				
@@ -24,29 +24,42 @@
 				function drawChart() {						
 				
 				var data1 = new google.visualization.DataTable();
-				data1.addColumn('string', 'Month');
-				data1.addColumn('number', 'Revenue');
+				data1.addColumn('string', 'Client');				
 				data1.addColumn('number', 'Cost');
 				data1.addColumn('number', 'Margin');
 				data1.addColumn('number', 'MarginPercentage');
+				data1.addColumn('number', 'Revenue');
 				data1.addRows(data2);					
 				
 					
-				var options = {
+				/*var options = {
 						vAxis: {title: 'Cups'},
 						hAxis: {title: 'Month'},	 
 						seriesType: 'bars',
 					    series: {3: {type: 'line', pointSize: 3}}
 						};
-						
+						*/
+				
+				var options = {
+				          colorAxis: {colors: ['yellow', 'red']},
+				          bubble: {
+				              textStyle: {
+				                fontSize: 12,
+				                fontName: 'Arial',
+				                color: '#900C3F',
+				                bold: true,
+				                auraColor: 'none'
+				              }
+				            }
+				        };
 					 
-				var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+				var chart = new google.visualization.BubbleChart(document.getElementById('chart_div'));
 				chart.draw(data1, options);						
 				
 			}
 				
 			});
 	            
-		};
+		}();
 	};
 })();

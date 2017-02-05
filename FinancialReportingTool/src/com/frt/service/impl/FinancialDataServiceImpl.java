@@ -91,7 +91,7 @@ public class FinancialDataServiceImpl implements FinancialDataService {
 	public List<FinancialDataDTO> calculateFinanceData(
 			List<FinancialDataDTO> financialDataDTOList,			
 			List<FinancialData> financeDataList, String typeOfFinanceData) {
-
+		
 		Double totalFinanceDataPerJanuary = 0.0;
 		Double totalFinanceDataPerFebruary = 0.0;
 		Double totalFinanceDataPerMarch = 0.0;

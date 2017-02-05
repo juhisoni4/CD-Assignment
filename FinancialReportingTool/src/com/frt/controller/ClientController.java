@@ -49,19 +49,17 @@ public class ClientController {
 				
 				revenue += financialData.getActualRevenue();
 				cost += financialData.getActualCost();
-				Double margin = revenue - cost;
+				Double margin =  revenue - cost;
 				Double marginPer = (margin/revenue)*100;
 				
 				financialDataDTO.setClientName(client.getClientName());
 				financialDataDTO.setRevenue(revenue);
 				financialDataDTO.setCost(cost);
 				financialDataDTO.setActualProjectMargin(margin);
-				financialDataDTO.setActualProjectMarginPercentage(marginPer);
-				
-				financialDataDTOList1.add(financialDataDTO);
-				
+				financialDataDTO.setActualProjectMarginPercentage(marginPer);		
 			}			
 			
+			financialDataDTOList1.add(financialDataDTO);
 
 		}
 		
