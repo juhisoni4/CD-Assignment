@@ -1,0 +1,63 @@
+JWT Token: Digitally Signed: Information is verified and trusted
+It is compact: JWT can be send via URL, POST request, HTTP Header
+			   Fast transmission
+Self Contained: Contains information about the user
+				Avoide qurying the database more than one
+Use: Authentication, exchange the information between the bodies
+JWT Token Structure: Header, Payload and Signature
+Header contains the algorithm 
+Payload contains claims. Claims are user details or additional metadata
+
+// signature algorithm
+data = base64urlEncode( header ) + “.” + base64urlEncode( payload )
+hashedData = hash( data, secret )
+signature = base64urlEncode( hashedData )
+
+-> The data string is hashed with the secret key using the hashing algorithm specified in the JWT header.
+-> The resulting hashed data is assigned to hashedData. This hashed data is then base64url encoded to produce the JWT signature.
+-> The reason why JWT are used is to prove that the sent data was actually created by an authentic source.
+-> The data inside a JWT is encoded and signed, not encrypted. The purpose of encoding data is to transform the data’s structure.
+   Signing data allows the data receiver to verify the authenticity of the source of the data. So encoding and signing data does
+   NOT secure the data. On the other hand, the main purpose of encryption is to secure the data and to prevent unauthorized
+   access.		
+-> Since JWT are signed and encoded only, and since JWT are not encrypted, JWT do not guarantee any security for sensitive data.
+
+Spring Cloud
+
+Routing and Mesaaging
+-> Cloud native app willbe composed of many microservices so communication will be critical
+-> Spring cloud supports communication via HTTP request or via messaging
+
+-> Routing and load balancing
+      Netflix Ribbon and Open Feign
+-> Messaging 
+      RabbitMQ or Kafka
+
+Micro services gonna talk to the registory service and figure out where is this service that I want to make a request to 
+located and use some form of routing or messaging to make that request. We can do that from a HTTP side of things using 
+Netflix ribbon or another open source project called open Feign. For asynchronius communication we can use messaging RabbitMQ or 
+Kafka
+
+Load balancing : Round ribbon approach or based on the latency 	  
+
+API Gateway
+-> API Gateway allow you to route API request(internal or external) to the correct service
+-> Netflix Zuul : Leverages service discovery and load balancer
+-> Spring cloud gateway
+
+Circuit Breakers
+-> Failure is inevitable, but your user's don't need to know
+-> Circuit breakers can help an application function in the face of failure
+-> Netflix Hystrix
+
+If request we are gonna makes is fails due to the connection time out or it is slow if that happens in a certain number
+of time circuit breaker will be tripped and then the request won't be 
+made anymore it won't actually make that request and that's gonna help us one to do one or two things. so we can actually return
+back some data to our clients somewhat usefuk as opposed to just throwing an error back at them and also help alleviate some 
+of the stress on the downstream servcices that are having a problem. So if the downstream service is just overloaded with
+too many requests by implementing a circuit breaker we are gonna alleviate some of that stress downstream or we can 
+retrun some potentially useful data to our client.
+
+DEMO Code: http://bit.ly/beginners1p
+
+   
